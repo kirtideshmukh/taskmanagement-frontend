@@ -1,0 +1,207 @@
+/* Core variables and mixins */
+svg.loader {
+  position: absolute;
+  z-index: 2;
+  fill: #595959;
+  -webkit-animation: iosIntro .6s;
+  -moz-animation: iosIntro .6s;
+  -ms-animation: iosIntro .6s;
+  -o-animation: iosIntro .6s;
+  animation: iosIntro .6s; }
+  svg.loader.loader-default {
+    width: 28px;
+    height: 28px; }
+  svg.loader.loader-sm {
+    width: 22px;
+    height: 22px;
+    margin: -11px 0 0 -11px; }
+  svg.loader.center-center {
+    top: 50%;
+    left: 50%;
+    margin: -14px 0 0 -14px; }
+  svg.loader.top-left {
+    top: 4px;
+    left: 4px;
+    margin: 0; }
+  svg.loader.top-center {
+    top: 4px;
+    left: 50%;
+    margin: 0 0 0 -14px; }
+  svg.loader.top-right {
+    top: 4px;
+    right: 4px;
+    margin: 0; }
+  svg.loader.bottom-left {
+    bottom: 4px;
+    left: 4px;
+    margin: 0; }
+  svg.loader.bottom-center {
+    bottom: 4px;
+    left: 50%;
+    margin: 0 0 0 -14px; }
+  svg.loader.bottom-right {
+    bottom: 4px;
+    right: 4px;
+    margin: 0; }
+  svg.loader.left-center {
+    left: 4px;
+    margin: -14px 0 0; }
+  svg.loader.right-center {
+    right: 4px;
+    margin: -14px 0 0; }
+  svg.loader path:nth-of-type(1) {
+    -webkit-animation: pulse 1s infinite linear;
+    -moz-animation: pulse 1s infinite linear;
+    -ms-animation: pulse 1s infinite linear;
+    -o-animation: pulse 1s infinite linear;
+    animation: pulse 1s infinite linear; }
+  svg.loader path:nth-of-type(2) {
+    -webkit-animation: pulse 1s -.083s infinite linear;
+    -moz-animation: pulse 1s -.083s infinite linear;
+    -ms-animation: pulse 1s -.083s infinite linear;
+    -o-animation: pulse 1s -.083s infinite linear;
+    animation: pulse 1s -.083s infinite linear; }
+  svg.loader path:nth-of-type(3) {
+    -webkit-animation: pulse 1s -.166s infinite linear;
+    -moz-animation: pulse 1s -.166s infinite linear;
+    -ms-animation: pulse 1s -.166s infinite linear;
+    -o-animation: pulse 1s -.166s infinite linear;
+    animation: pulse 1s -.166s infinite linear; }
+  svg.loader path:nth-of-type(4) {
+    -webkit-animation: pulse 1s -.249s infinite linear;
+    -moz-animation: pulse 1s -.249s infinite linear;
+    -ms-animation: pulse 1s -.249s infinite linear;
+    -o-animation: pulse 1s -.249s infinite linear;
+    animation: pulse 1s -.249s infinite linear; }
+  svg.loader path:nth-of-type(5) {
+    -webkit-animation: pulse 1s -.332s infinite linear;
+    -moz-animation: pulse 1s -.332s infinite linear;
+    -ms-animation: pulse 1s -.332s infinite linear;
+    -o-animation: pulse 1s -.332s infinite linear;
+    animation: pulse 1s -.332s infinite linear; }
+  svg.loader path:nth-of-type(6) {
+    -webkit-animation: pulse 1s -.415s infinite linear;
+    -moz-animation: pulse 1s -.415s infinite linear;
+    -ms-animation: pulse 1s -.415s infinite linear;
+    -o-animation: pulse 1s -.415s infinite linear;
+    animation: pulse 1s -.415s infinite linear; }
+  svg.loader path:nth-of-type(7) {
+    -webkit-animation: pulse 1s -.498s infinite linear;
+    -moz-animation: pulse 1s -.498s infinite linear;
+    -ms-animation: pulse 1s -.498s infinite linear;
+    -o-animation: pulse 1s -.498s infinite linear;
+    animation: pulse 1s -.498s infinite linear; }
+  svg.loader path:nth-of-type(8) {
+    -webkit-animation: pulse 1s -.581s infinite linear;
+    -moz-animation: pulse 1s -.581s infinite linear;
+    -ms-animation: pulse 1s -.581s infinite linear;
+    -o-animation: pulse 1s -.581s infinite linear;
+    animation: pulse 1s -.581s infinite linear; }
+  svg.loader path:nth-of-type(9) {
+    -webkit-animation: pulse 1s -.664s infinite linear;
+    -moz-animation: pulse 1s -.664s infinite linear;
+    -ms-animation: pulse 1s -.664s infinite linear;
+    -o-animation: pulse 1s -.664s infinite linear;
+    animation: pulse 1s -.664s infinite linear; }
+  svg.loader path:nth-of-type(10) {
+    -webkit-animation: pulse 1s -.747s infinite linear;
+    -moz-animation: pulse 1s -.747s infinite linear;
+    -ms-animation: pulse 1s -.747s infinite linear;
+    -o-animation: pulse 1s -.747s infinite linear;
+    animation: pulse 1s -.747s infinite linear; }
+  svg.loader path:nth-of-type(11) {
+    -webkit-animation: pulse 1s -.83s infinite linear;
+    -moz-animation: pulse 1s -.83s infinite linear;
+    -ms-animation: pulse 1s -.83s infinite linear;
+    -o-animation: pulse 1s -.83s infinite linear;
+    animation: pulse 1s -.83s infinite linear; }
+  svg.loader path:nth-of-type(12) {
+    -webkit-animation: pulse 1s -.913s infinite linear;
+    -moz-animation: pulse 1s -.913s infinite linear;
+    -ms-animation: pulse 1s -.913s infinite linear;
+    -o-animation: pulse 1s -.913s infinite linear;
+    animation: pulse 1s -.913s infinite linear; }
+
+@-webkit-keyframes pulse {
+  50% {
+    fill: #868686; }
+  to {
+    fill: rgba(134, 134, 134, 0.4); } }
+
+@-moz-keyframes pulse {
+  50% {
+    fill: #868686; }
+  to {
+    fill: rgba(134, 134, 134, 0.4); } }
+
+@-ms-keyframes pulse {
+  50% {
+    fill: #868686; }
+  to {
+    fill: rgba(134, 134, 134, 0.4); } }
+
+@-o-keyframes pulse {
+  50% {
+    fill: #868686; }
+  to {
+    fill: rgba(134, 134, 134, 0.4); } }
+
+@keyframes pulse {
+  50% {
+    fill: #868686; }
+  to {
+    fill: rgba(134, 134, 134, 0.4); } }
+
+@-webkit-keyframes iosIntro {
+  from {
+    transform: scale(0);
+    opacity: 0; }
+  to {
+    transform: scale(1);
+    opacity: 1; } }
+
+@-moz-keyframes iosIntro {
+  from {
+    transform: scale(0);
+    opacity: 0; }
+  to {
+    transform: scale(1);
+    opacity: 1; } }
+
+@-ms-keyframes iosIntro {
+  from {
+    transform: scale(0);
+    opacity: 0; }
+  to {
+    transform: scale(1);
+    opacity: 1; } }
+
+@-o-keyframes iosIntro {
+  from {
+    transform: scale(0);
+    opacity: 0; }
+  to {
+    transform: scale(1);
+    opacity: 1; } }
+
+@keyframes iosIntro {
+  from {
+    transform: scale(0);
+    opacity: 0; }
+  to {
+    transform: scale(1);
+    opacity: 1; } }
+
+.button-wrap {
+  position: relative; }
+  .button-wrap > svg.loader {
+    width: 22px;
+    height: 22px;
+    margin: -5px -11px 0 0;
+    right: -27px;
+    left: inherit; }
+
+.btn svg.loader {
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px; }
