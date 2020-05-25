@@ -8,12 +8,13 @@ import { routes } from "routes";
 
 import { ROUTES } from "appConstants";
 import RouteWithSubRoutes from "utils/routesWithSubRoutes";
+import NavigationBar from "components/NavBar";
 
 const AppLayoutContainer = () => {
   return (
     <>
-      AppLayoutContainer
       <ReactNotification />
+      <NavigationBar />
       <Router>
         <Switch>
           <Redirect exact from={ROUTES.index} to={ROUTES.dashboard} />
