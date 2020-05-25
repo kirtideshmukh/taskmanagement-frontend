@@ -2,17 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
+import "react-notifications-component/dist/theme.css";
 
 import './index.css';
-import App from './App';
 import store from "store";
 import history from "history.js";
+import AppLayoutContainer from 'containers/AppLayoutContainer';
 
 ReactDOM.render(
   <Provider store={store}>
       <Router history={history}>
         <Switch>
-          <Route path="/" component={App} />
+          <Route path="/" component={AppLayoutContainer} />
         </Switch>
       </Router>
   </Provider>,
