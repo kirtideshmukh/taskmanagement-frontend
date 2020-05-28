@@ -15,14 +15,16 @@ const AppLayoutContainer = () => {
     <>
       <ReactNotification />
       <NavigationBar />
-      <Router>
-        <Switch>
-          <Redirect exact from={ROUTES.index} to={ROUTES.dashboard} />
-          {routes.map(route => {
-            return <RouteWithSubRoutes key={route.key} {...route} />;
-          })}      
-        </Switch>
-      </Router>
+      <div className="container-fluid">
+        <Router>
+          <Switch>
+            <Redirect exact from={ROUTES.index} to={ROUTES.dashboard} />
+            {routes.map(route => {
+              return <RouteWithSubRoutes key={route.key} {...route} />;
+            })}      
+          </Switch>
+        </Router>
+      </div>
     </>
   );
 };
