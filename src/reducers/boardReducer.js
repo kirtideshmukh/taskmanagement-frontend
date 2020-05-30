@@ -13,7 +13,10 @@ export const initialState = {
   modalState: false,
   totalBoards: [],
   filteredBoards: [],
-  boardList: []
+  boardList: [],
+  boardModalState: {
+    isOpen: false
+  }
 };
 
 const boardReducer = (state = initialState, action = {}) => {
@@ -29,6 +32,7 @@ const boardReducer = (state = initialState, action = {}) => {
     case boardActions.boardUpdationSucceeded:
     case boardActions.boardUpdationFailed:
     case boardActions.toggleModalState:
+      console.log("1111111111111", action.payload);
       return { ...state, ...action.payload };
     case boardActions.boardFetchingSucceeded: {
       const { payload } = action,

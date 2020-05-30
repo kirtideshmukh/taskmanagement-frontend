@@ -2,7 +2,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { isEmptyArray } from "helpers/isEmptyValue";
+import { isEmptyArray } from "utils/isEmptyValue";
 
 import "./ServerSideErrorHelpBlock.scss";
 

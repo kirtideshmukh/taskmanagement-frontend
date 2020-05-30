@@ -4,7 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "reactstrap";
 
-import ServerSideErrorHelpBlock from "components/ServerSideErrorHelpBlock/ServerSideErrorHelpBlock";
+import ServerSideErrorHelpBlock from "./ServerSideErrorHelpBlock";
 
 /**Component to show serversideErrorHelpBlock on the form components */
 const ServerErrorOnForm = props => {
