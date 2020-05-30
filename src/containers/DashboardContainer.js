@@ -1,8 +1,16 @@
-import React from  "react";
+import React, { useEffect, Fragment } from  "react";
 import PropTypes from "prop-types";
-import BoardList from "components/Dashboard/BoardList";
+import { useSelector, useDispatch } from "react-redux";
 
-const boardList = [{
+import BoardList from "../components/Dashboard/BoardList";
+
+import {
+  fetchBoardList
+} from "actions/boardActions";
+import Loader from "components/shared/Loader/Loader";
+import { Button } from "reactstrap";
+
+const boards = [{
   id: 1,
   name: "Board 1"
 },
@@ -28,11 +36,29 @@ const boardList = [{
 }
 ]
 
+
+
 const Dashboard = () => {
+  const dispatch = useDispatch(),
+    { userId } = useSelector(state => state.appReducer),
+    { boardList, isLoading } = useSelector(state => state.boardReducer);
+
+  /**Get list of boards. */
+  useEffect(() => {
+    fetchBoardList(userId)
+  }, [userId, dispatch]);
+
+  if(isLoading) {
+    return <Loader />
+  }
+
   return (
-    <BoardList boardList={boardList} />
-  )
-  
+    <Fragment>
+      <Button> Add Board </Button>
+      <BoardList boardList={boards} />
+    </Fragment>
+    
+  ) 
 }
 
 Dashboard.propTypes = {

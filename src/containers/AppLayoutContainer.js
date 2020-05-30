@@ -6,9 +6,9 @@ import ReactNotification from "react-notifications-component";
 
 import { routes } from "routes";
 
-import { ROUTES } from "appConstants";
-import RouteWithSubRoutes from "utils/routesWithSubRoutes";
-import NavigationBar from "components/NavBar";
+import { ROUTES } from "../appConstants";
+import RouteWithSubRoutes from "../utils/routesWithSubRoutes";
+import NavigationBar from "../components/NavBar";
 
 const AppLayoutContainer = () => {
   return (

@@ -1,5 +1,4 @@
 import React from  "react";
-import PropTypes from "prop-types";
 import { Row, Col, Card, CardTitle, Button } from "reactstrap";
 
 const BoardList = ({boardList}) => {
