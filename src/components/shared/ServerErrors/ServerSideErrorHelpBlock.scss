@@ -1,0 +1,36 @@
+// // Error msg block
+.error-wrap {
+  margin: 0 0 30px;
+  text-align: center;
+}
+
+.error-block {
+  // display: inline-block;
+  color: rgb(240, 73, 73);
+  // padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 0.25rem;
+  word-break: break-word;
+  // width: 17rem;
+  display: table;
+  // margin: 0 auto;
+  font-size: 80%;
+  display: flex;
+  // justify-content: center;
+
+  > .error-msg {
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0 0 10px;
+    text-align: center;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+.server-error-wrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

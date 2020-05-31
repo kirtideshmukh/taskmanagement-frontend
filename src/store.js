@@ -9,11 +9,6 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   rootReducer,
-  {
-    // appReducer: {
-    //   ...initialState
-    // }
-  },
   applyMiddleware(sagaMiddleware)
 );
 

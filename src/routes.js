@@ -3,18 +3,19 @@ import { Router, Switch } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import RouteWithSubRoutes from "utils/routesWithSubRoutes";
+import { ROUTES } from "appConstants";
+
+import DashboardContainer from "containers/DashboardContainer";
 
 // import RouteHelperHoC from "HoCs/routeHelperHoC";
 
-// import { ROUTES } from "appConstants";
-
 export const routes = [
-  // {
-  //   path: ROUTES.dashboard,
-  //   component: DashboardContainer,
-  //   key: "dashboard",
-  //   exact: true
-  // },
+  {
+    path: ROUTES.dashboard,
+    component: DashboardContainer,
+    key: "dashboard",
+    exact: true
+  },
   // {
   //   path: ROUTES.login,
   //   component: LoginLayout,

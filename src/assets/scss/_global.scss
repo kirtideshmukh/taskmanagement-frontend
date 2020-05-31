@@ -1,0 +1,45 @@
+body {
+  height: 100vh;
+  
+  .form-group {
+    margin-bottom: rem(30px);
+  }
+
+  .form-control {
+    // height: rem(50px);
+    @include media-breakpoint-down(md){
+      font-size: rem(12px);
+    }
+  }
+}
+
+
+/// Form Control css
+
+.form-control {
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.col-form-label {
+  font-size: rem(14px);
+  font-weight: 700;
+}
+// NOTE: We will use the following property for submit-buttons all over the applications
+.submit-btn {
+  background-color: $purple-dark;
+  color: $white;
+}
+
+.modal-submit-btn {
+  float: right;
+  width: 6rem;
+  background-color: #28a745;
+  height: rem(38px) !important;
+}
+
+.has-error {
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+}
