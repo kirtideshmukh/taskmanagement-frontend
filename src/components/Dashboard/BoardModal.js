@@ -15,7 +15,6 @@ const BoardModal = props => {
     onBlurName,
     onChangeName,
     name,
-    errors,
     onSubmit,
     isSubmitting,
     serverErrors,

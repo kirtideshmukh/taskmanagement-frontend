@@ -6,13 +6,15 @@ import BoardList from "../components/Dashboard/BoardList";
 import {
   fetchBoardList,
   toggleModalState,
-  createBoard
+  createBoard,
+  deleteBoard
 } from "actions/boardActions";
 import Loader from "components/shared/Loader";
 import { Button } from "reactstrap";
 import BoardModal from "../components/Dashboard/BoardModal";
 import { getInputFieldValue } from "utils/formHelpers";
 import { BTN_LABELS, ERRORS } from "../appConstants";
+import DeleteBoardModal from "components/Dashboard/DeleteBoardModal";
 
 const boards = [{
   id: 1,
@@ -45,7 +47,7 @@ const boards = [{
 const Dashboard = () => {
   const dispatch = useDispatch(),
     { userId } = useSelector(state => state.appReducer),
-    { boardList, isLoading, boardModalState } = useSelector(state => state.boardReducer),
+    { boardList, isLoading, boardModalState, deleteBoardModalState } = useSelector(state => state.boardReducer),
     [ name, setName ] =  useState(""),
     [ nameError, setNameError] = useState("");
   
@@ -91,10 +93,21 @@ const Dashboard = () => {
     }
   };
 
+  const toggleDeleteModal = (deletedBoardId) => {
+    deleteBoardModalState.isOpen = !deleteBoardModalState.isOpen;
+    deleteBoardModalState.boardId = deletedBoardId;
+    
+    dispatch(toggleModalState(deleteBoardModalState));
+  }
+
   const toggleModal = (modalState) =>{
     modalState.isOpen = !modalState.isOpen;
     
     dispatch(toggleModalState(modalState));
+  }
+
+  const callDeleteBoard = () => {
+    dispatch(deleteBoard({board_id: deleteBoardModalState.boardId, user_id: userId}))
   }
 
   if(isLoading) {
@@ -104,7 +117,7 @@ const Dashboard = () => {
   return (
     <Fragment>
       <Button onClick={() => toggleModal(boardModalState)}> Add Board </Button>
-      <BoardList boardList={boards} />
+      <BoardList boardList={boards} toggleModal={toggleDeleteModal} />
       {
         boardModalState.isOpen && (
           <BoardModal 
@@ -117,6 +130,15 @@ const Dashboard = () => {
             modalTitle={"Add Board"}
             buttonLabel={BTN_LABELS.save}
             onSubmit={onSubmit}
+          />
+        )
+      }
+      {
+        deleteBoardModalState.isOpen && (
+          <DeleteBoardModal 
+            modalState={deleteBoardModalState.isOpen}
+            toggleModal={toggleDeleteModal}
+            deleteBoard={callDeleteBoard}
           />
         )
       }

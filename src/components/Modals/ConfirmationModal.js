@@ -4,8 +4,8 @@ import React from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 import PropTypes from "prop-types";
 
-import ServerErrorOnForm from "components/ServerErrorsOnForm";
-import FormLoader from "components/Loader/Loader";
+// import ServerErrorOnForm from "components/ServerErrorsOnForm";
+import FormLoader from "components/shared/Loader";
 
 const getCloseIcon = handleOnClick => (
   <button className="close" onClick={handleOnClick}>
@@ -20,7 +20,6 @@ const ConfirmationModal = props => {
     handleOnClick,
     confirmationMessage,
     buttonTitle,
-    modalErrors,
     isLoading,
     buttonColor
   } = props;
@@ -30,7 +29,7 @@ const ConfirmationModal = props => {
       <Modal isOpen={modalState} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal} close={getCloseIcon(toggleModal)}>
           {modalTitle}
-          <ServerErrorOnForm messages={modalErrors} />
+          {/* <ServerErrorOnForm messages={modalErrors} /> */}
         </ModalHeader>
         <ModalBody>
           <span>{confirmationMessage}</span>

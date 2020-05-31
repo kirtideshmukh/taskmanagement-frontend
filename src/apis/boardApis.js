@@ -1,6 +1,6 @@
 /** @format */
 
-import { getApi, postApi, patchApi } from "./apiHelpers";
+import { getApi, postApi, patchApi, deleteApi } from "./apiHelpers";
 import { API_ENDPOINTS } from "appConstants";
 
 export const getBoardsApi = (kwargs = {}) => getApi(`${API_ENDPOINTS.board}/all`, kwargs);
@@ -16,3 +16,11 @@ export const updateBoardApi = (params = {}) => {
 
   return patchApi(`${API_ENDPOINTS.board}/${id}`, kwargs);
 };
+
+export const deleteBoardApi = (params ={}) => {
+  const kwargs = {
+    user_id: params.user_id
+  }
+
+  return deleteApi(`${API_ENDPOINTS.board}/${params.board_id}`, kwargs);
+}
