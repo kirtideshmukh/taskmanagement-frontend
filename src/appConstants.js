@@ -3,7 +3,8 @@ export const ROUTES = {
   setPassword: "/set-password",
   login: "/login",
   signUp: "/sign-up",
-  index: "/"
+  index: "/",
+  boards: "/boards"
 };
 
 export const BTN_LABELS = {

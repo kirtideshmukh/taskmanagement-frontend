@@ -47,7 +47,7 @@ const boards = [{
 const Dashboard = () => {
   const dispatch = useDispatch(),
     { userId } = useSelector(state => state.appReducer),
-    { boardList, isLoading, boardModalState, deleteBoardModalState } = useSelector(state => state.boardReducer),
+    { boardList, isLoading, boardModalState, deleteBoardModalState } = useSelector(state => state.boardListReducer),
     [ name, setName ] =  useState(""),
     [ nameError, setNameError] = useState("");
   

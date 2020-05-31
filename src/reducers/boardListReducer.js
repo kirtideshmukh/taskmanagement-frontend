@@ -69,7 +69,7 @@ const boardReducer = (state = initialState, action = {}) => {
         filteredBrands
       };
     }
-    case boardActions.resetToInitialState:
+    case boardActions.resetListReducerToInitialState:
       return initialState;
     default:
       return state;

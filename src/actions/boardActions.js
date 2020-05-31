@@ -13,8 +13,12 @@ const boardActions = {
   boardDeletionInitiated: " BOARD_DELETION_INITIATED",
   boardDeletionSucceeded: "BOARD_DELETION_SUCCEEDED",
   boardDeletionFailed: "BOARD_DELETION_FAILED",
-  resetToInitialState: "RESET_BOARD_REDUCER_TO_INITAIL_STATE",
-  toggleModalState: "TOGGLE_MODAL_STATE"
+  resetListReducerToInitialState: "RESET_BOARD_LIST_REDUCER_TO_INITAIL_STATE",
+  resetDetailsReducerToInitialState: "RESET_BOARD_DETAILS_REDUCER_TO_INITIAL_STATE",
+  toggleModalState: "TOGGLE_MODAL_STATE",
+  boardDetailsFetchInitiated: "BOARD_FETCH_INITIATED",
+  boardDetailsFetchingSucceeded: "BOARD_FETCHING_SUCCEEDED",
+  boardDetailsFetchingFailed: "BOARD_FETCHING_FAILED"
 };
 
 export const toggleModalState = modalState => ({
@@ -22,10 +26,16 @@ export const toggleModalState = modalState => ({
   payload: { modalState, serverErrors: [] }
 });
 
-export const resetToInitialState = () => ({
-  type: boardActions.resetToInitialState,
+export const resetDetailsReducerToInitialState = () => ({
+  type: boardActions.resetDetailsReducerToInitialState,
   payload: {}
 });
+
+export const resetListReducerToInitialState = () => ({
+  type: boardActions.resetListReducerToInitialState,
+  payload: {}
+});
+
 
 export const fetchBoardList = (params) => ({
   type: boardActions.boardListFetchInitiated,
@@ -112,6 +122,28 @@ export const boardUpdationSucceeded = () => ({
 
 export const boardUpdationFailed = serverErrors => ({
   type: boardActions.boardUpdationFailed,
+  payload: {
+    isSubmitting: false,
+    serverErrors
+  }
+});
+
+export const fetchBoardDetails = params => ({
+  type: boardActions.boardDetailsFetchInitiated,
+  payload: {
+    params
+  }
+});
+
+export const boardDetailsFetchingSucceeded = (boardDetails) => ({
+  type: boardActions.boardDetailsFetchingSucceeded,
+  payload: {
+    boardDetails
+  }
+});
+
+export const boardDetailsFetchingFailed = serverErrors => ({
+  type: boardActions.boardDetailsFetchingFailed,
   payload: {
     isSubmitting: false,
     serverErrors
