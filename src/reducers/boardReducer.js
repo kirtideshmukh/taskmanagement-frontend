@@ -14,7 +14,8 @@ export const initialState = {
     isOpen: false
   },
   deleteBoardModalState: {
-    isOpen: false
+    isOpen: false,
+    boardId: null
   }
 };
 
@@ -55,7 +56,10 @@ const boardReducer = (state = initialState, action = {}) => {
     }
     case boardActions.boardDeletionSucceeded:
     case boardActions.boardDeletionFailed: {
-      return { ...state, ...action.payload, deleteBoardModalState: initialState.deleteBoardModalState}
+      let deleteBoardModalState = initialState.deleteBoardModalState;
+      deleteBoardModalState.isOpen = false;
+      deleteBoardModalState.boardId =  null;
+      return { ...state, ...action.payload, ...deleteBoardModalState}
     }
     case boardActions.updateFilteredBoards: {
       const { payload } = action,

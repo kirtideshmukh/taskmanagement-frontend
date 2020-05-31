@@ -79,6 +79,22 @@ export const deleteBoard = params => ({
   }
 })
 
+export const boardDeletionSucceeded = () => ({
+  type: boardActions.boardDeletionSucceeded,
+  payload: {
+    isSubmitting: false,
+    modalState: false
+  }
+});
+
+export const boardDeletionFailed = serverErrors => ({
+  type: boardActions.boardDeletionFailed,
+  payload: {
+    isSubmitting: false,
+    serverErrors
+  }
+});
+
 export const updateBoard = params => ({
   type: boardActions.boardUpdationInitiated,
   payload: {

@@ -1,7 +1,7 @@
 import React from  "react";
 import { Row, Col, Card, CardTitle, Button } from "reactstrap";
 
-const BoardList = ({boardList}) => {
+const BoardList = ({boardList, toggleModal}) => {
 
   return (
     <Row>
@@ -11,7 +11,7 @@ const BoardList = ({boardList}) => {
             <Col key={index} sm="3" md="3" lg="3">
               <Card body>
                 <CardTitle>{board.name}</CardTitle>
-                <Button><i  className="fa fa-trash"/></Button>
+                <Button onClick={() => toggleModal(board.id) }><i  className="fa fa-trash"/> Delete</Button>
               </Card>
             </Col>
           )    
