@@ -5,13 +5,14 @@ import BoardList from "../components/Dashboard/BoardList";
 
 import {
   fetchBoardList,
-  toggleModalState
+  toggleModalState,
+  createBoard
 } from "actions/boardActions";
 import Loader from "components/shared/Loader";
 import { Button } from "reactstrap";
 import BoardModal from "../components/Dashboard/BoardModal";
 import { getInputFieldValue } from "utils/formHelpers";
-import { BTN_LABELS } from "../appConstants";
+import { BTN_LABELS, ERRORS } from "../appConstants";
 
 const boards = [{
   id: 1,
@@ -50,34 +51,42 @@ const Dashboard = () => {
 
   /**Get list of boards. */
   useEffect(() => {
-    fetchBoardList(userId)
+    // debugger;
+    dispatch(fetchBoardList({user_id:userId}))
   }, [userId, dispatch]);
 
   const onChangeName = event => {
-    this.setState({ name: getInputFieldValue(event) });
+    setName(getInputFieldValue(event));
   };
 
   const onBlurName = () => {
-    const { name } = this.state;
-
     setName(name.trim());
     setNameError(validateName());
-
-    // this.setState({
-    //   name: name.trim(),
-    //   errors: {
-    //     ...errors,
-    //     name: validateName()
-    //   }
-    // });
   };
 
   /**Check for the validation of login-id and return the associated error-value */
   const validateName = () => {
-    const { errorsMapping } = this.props,
-      { name } = this.state;
+    
+    return !name.trim() ? ERRORS.required : "";
+  };
 
-    return !name.trim() ? errorsMapping.requiredBrandName : "";
+  const  onSubmit = event => {
+    event.preventDefault();
+
+    const nameError = validateName(),
+      params = {
+        name: name.trim().toUpperCase(),
+        user_id: userId  
+      };
+
+    setNameError(nameError);
+
+    if (!nameError) {
+      /**When editing a record, call update api
+       * Else call create-brand api.
+       */
+      createBoard(params);
+    }
   };
 
   const toggleModal = (modalState) =>{
@@ -105,6 +114,7 @@ const Dashboard = () => {
             toggleModal={toggleModal}
             modalTitle={"Add Board"}
             buttonLabel={BTN_LABELS.save}
+            onSubmit={onSubmit}
           />
         )
       }

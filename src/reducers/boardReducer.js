@@ -5,9 +5,6 @@ import boardActions from "actions/boardActions";
 export const initialState = {
   isLoading: false,
   isSubmitting: false,
-  errorsMapping: {
-    requiredBrandName: "Please enter board name."
-  },
   serverErrors: [],
   total_count: 0,
   modalState: false,
@@ -20,21 +17,20 @@ export const initialState = {
 };
 
 const boardReducer = (state = initialState, action = {}) => {
+  console.log("=====", action)
   switch (action.type) {
-    case boardActions.boardFetchInitiated:
+    case boardActions.boardListFetchInitiated:
       return { ...state, isLoading: true };
     case boardActions.boardCreationInitiated:
     case boardActions.boardUpdationInitiated:
       return { ...state, isSubmitting: true };
-    case boardActions.boardFetchingFailed:
-    case boardActions.boardCreationSucceeded:
+    case boardActions.boardListFetchingFailed:
     case boardActions.boardCreationFailed:
     case boardActions.boardUpdationSucceeded:
     case boardActions.boardUpdationFailed:
     case boardActions.toggleModalState:
-      console.log("1111111111111", action.payload);
       return { ...state, ...action.payload };
-    case boardActions.boardFetchingSucceeded: {
+    case boardActions.boardListFetchingSucceeded: {
       const { payload } = action,
         { brandList, total_count, isLoading } = payload;
 
@@ -45,6 +41,9 @@ const boardReducer = (state = initialState, action = {}) => {
         totalBrands: brandList,
         filteredBrands: brandList
       };
+    }
+    case boardActions.boardCreationSucceeded: {
+      return { ...state, ...action.payload, boardModalState: initialState.boardModalState}
     }
     case boardActions.updateFilteredBoards: {
       const { payload } = action,

@@ -24,16 +24,17 @@ export const resetToInitialState = () => ({
   payload: {}
 });
 
-export const fetchBoardList = () => ({
+export const fetchBoardList = (params) => ({
   type: boardActions.boardListFetchInitiated,
-  payload: {}
+  payload: {
+    params
+  }
 });
 
-export const fetchingBoardListSucceeded = (boardList, total_count) => ({
+export const fetchingBoardListSucceeded = (boardList) => ({
   type: boardActions.boardListFetchingSucceeded,
   payload: {
     boardList,
-    total_count,
     isLoading: false
   }
 });

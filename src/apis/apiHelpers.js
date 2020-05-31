@@ -6,9 +6,9 @@ import {
   PUBLIC_API_END_POINTS,
   ROUTES
 } from "appConstants";
-import { redirectTo, getPathName } from "helpers/browserHelper";
+import { redirectTo, getPathName } from "utils/browserHelpers";
 import { getAppReducer } from "store";
-import { isEmptyObject } from "helpers/isEmptyValue";
+import { isEmptyObject } from "utils/isEmptyValue";
 
 // eslint-disable-next-line no-undef
 const apiHostUrl = process.env.REACT_APP_API_BASE_URL;
@@ -113,6 +113,8 @@ const callApi = async (reqPath, payload, httpMethod, optionalHeaders = {}) => {
     } = getAppReducer();
     headers = { ...headers, ...getAuthorizationHeader(auth_token) };
   }
+
+  console.log("============", fetchUrl)
 
   const fetchOptions = constructFetchOptions(httpMethod, headers, payload),
     response = await fetch(fetchUrl, fetchOptions),

@@ -9,7 +9,7 @@ export const initialState = {
   auth_token: "",
   gotAccessControls: false, //To check whether the api is already called or not
   redirectToLogin: false,
-  userId: null,
+  userId: 2,
   loggedInUser: {
     id: "",
     role: "",

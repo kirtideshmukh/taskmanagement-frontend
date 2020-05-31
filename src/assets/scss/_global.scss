@@ -1,33 +1,6 @@
 body {
   height: 100vh;
-  font-family: "Poppins", sans-serif;
-
-  > #root {
-    @include flexbox();
-    @include flex-direction(column);
-    @include flex(1);
-    height: 100vh;
-    overflow: auto;
-  }
-
-  header {
-    position: relative;
-    // z-index: 9999;
-  }
-
-  main {
-    @include flexbox();
-    @include flex(1);
-    @include align-items(flex-start);
-    @include justify-content(center);
-    min-height: 0;
-  }
-
-  h2 {
-    font-size: rem(30px);
-    line-height: rem(33px);
-  }
-
+  
   .form-group {
     margin-bottom: rem(30px);
   }
@@ -40,132 +13,6 @@ body {
   }
 }
 
-.page {
-  padding-top: rem(80px);
-}
-
-/// Main Part Css
-
-.page-main {
-  position: relative;
-  min-height: rem(430px);
-  overflow: hidden;
-  z-index: 2;
-
-  @include media-breakpoint-down(sm) {
-    min-height: rem(320px);
-  }
-
-  &::after {
-    content: " ";
-    position: absolute;
-    background: url(../images/carright.jpg) no-repeat;
-    right: rem(-330px);
-    width: rem(800px);
-    bottom: 0;
-    top: 0;
-    height: auto;
-
-    @include media-breakpoint-down(md) {
-      right: rem(-440px);
-    }
-
-    @include media-breakpoint-down(sm) {
-      right: rem(-630px);
-      top: rem(-100px);
-    }
-  }
-
-  &::before {
-    content: " ";
-    position: absolute;
-    background: url(../images/carleft.jpg) no-repeat;
-    left: rem(-330px);
-    width: rem(800px);
-    bottom: 0;
-    top: 0;
-    height: auto;
-
-    @include media-breakpoint-down(md) {
-      left: rem(-440px);
-    }
-
-    @include media-breakpoint-down(sm) {
-      left: rem(-630px);
-      top: rem(-100px);
-    }
-  }
-}
-
-.main-content {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-/// Button css
-
-.btn-bidwheelz {
-  padding: rem(6px 10px);
-  font-size: rem(14px);
-  line-height: normal;
-  min-width: rem(80px);
-
-  &.-lg {
-    padding: rem(4px 80px);
-    font-size: rem(18px);
-    line-height: rem(24px);
-    border: rem(5px) solid $purple-dark;
-
-    @include media-breakpoint-down(sm) {
-      padding: rem(12px 40px);
-    }
-  }
-}
-
-/// Social Links css
-
-.social-links {
-  @include flexbox;
-
-  li {
-    padding: 0 rem(5px);
-  }
-
-  .facebook-link {
-    &:hover {
-      background-color: #4a6ea9;
-      border-color: #4a6ea9;
-    }
-  }
-
-  .twitter-link {
-    &:hover {
-      background-color: #32def4;
-      border-color: #32def4;
-    }
-  }
-
-  .linkedin-link {
-    &:hover {
-      background-color: #007bb6;
-      border-color: #007bb6;
-    }
-  }
-
-  .instagram-link {
-    &:hover {
-      background-color: #a83aaa;
-      border-color: #a83aaa;
-    }
-  }
-
-  .youtube-link {
-    &:hover {
-      background-color: #e46044;
-      border-color: #e46044;
-    }
-  }
-}
 
 /// Form Control css
 
@@ -192,47 +39,7 @@ body {
   height: rem(38px) !important;
 }
 
-.select-bw {
-  &.has-error{
-    .select__control {
-      border: 0;
-    }
-  }
-  
-  .select__control {
-    .select__placeholder,.select__single-value{
-      @include media-breakpoint-down(md){
-        font-size: rem(12px);
-      }
-    }
-
-    &.select__control--is-focused{
-      border-color: $purple-dark;
-      box-shadow: none;
-    }
-  }
-}
-
-.select__placeholder{
-  @include media-breakpoint-down(md){
-    font-size: rem(12px);
-  }
-}
-
 .has-error {
   border: 1px solid #dc3545;
   border-radius: 4px;
-}
-
-/** This property is used for showing default image while creating image OR uploading new-images.*/
-.car-img-wrap {
-  width: rem(150px);
-  height: rem(150px);
-  border-radius: 6%;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: auto;
-  }
 }
