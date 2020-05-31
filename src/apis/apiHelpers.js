@@ -114,8 +114,6 @@ const callApi = async (reqPath, payload, httpMethod, optionalHeaders = {}) => {
     headers = { ...headers, ...getAuthorizationHeader(auth_token) };
   }
 
-  console.log("============", fetchUrl)
-
   const fetchOptions = constructFetchOptions(httpMethod, headers, payload),
     response = await fetch(fetchUrl, fetchOptions),
     parsedResponse = await response.json();

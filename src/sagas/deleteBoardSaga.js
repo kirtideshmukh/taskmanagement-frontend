@@ -23,7 +23,6 @@ export function* deleteBoard(action) {
     yield put(fetchBoardList());
     yield put(successNotification("Board deleted successfully!"));
   } catch (errorResponse) {
-    console.log({errorResponse});
     const { errors, message } = errorResponse;
     // const errorsShown = getFormErrors(errors, message);
     yield dangerNotification(message)

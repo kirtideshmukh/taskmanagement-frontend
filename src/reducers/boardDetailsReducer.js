@@ -7,8 +7,18 @@ export const initialState = {
   boardDetails: {}
 };
 
+export const getStatusWiseTasks  = (boardDetails = {}) => {
+  const { task_status, tasks } = boardDetails;
+  return task_status.map(status => {
+    const { name: key } = status,
+    value = tasks.filter(task => task.status === status.name)
+    return {
+      [key]: value
+    }
+  })
+}
+
 const boardDetailsReducer = (state = initialState, action = {}) => {
-  console.log("=====", action)
   switch (action.type) {
     case boardActions.boardDetailsFetchInitiated:
       return { ...state, isLoading: true };
@@ -21,7 +31,8 @@ const boardDetailsReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLoading: false,
-        boardDetails
+        boardDetails,
+        taskList: getStatusWiseTasks(boardDetails)
       };
     }
     case boardActions.resetDetailsReducerToInitialState:

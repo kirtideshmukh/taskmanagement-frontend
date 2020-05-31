@@ -12,8 +12,6 @@ import store from "store";
 import history from "history.js";
 import AppLayoutContainer from 'containers/AppLayoutContainer';
 
-console.log({store})
-
 ReactDOM.render(
   <Provider store={store}>
       <Router history={history}>

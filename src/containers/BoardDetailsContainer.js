@@ -7,7 +7,9 @@ import {
 import Loader from "components/shared/Loader";
 import { Button } from "reactstrap";
 
-import { BTN_LABELS, ERRORS } from "../appConstants";
+import { getStatusWiseTasks } from "reducers/boardDetailsReducer";
+import TaskLane from "components/Tasks/TaskLane";
+
 
 const boardDetails = {
   task_status : [
@@ -80,29 +82,33 @@ const boardDetails = {
   ]
 }
 
+const taskList = getStatusWiseTasks(boardDetails);
 
+// console.log({taskList})
 
 const BoardDetailsContainer = (props) => {
   const dispatch = useDispatch(),
     { userId } = useSelector(state => state.appReducer),
-    { boardDetails, isLoading } = useSelector(state => state.boardDetailsReducer);
+    { boardDetails, 
+    isLoading,
+    //  taskList 
+     } = useSelector(state => state.boardDetailsReducer),
+    { match : { params: {boardId = null} = {} } ={} } = props;
   
-  console.log({props})
-
   /**Get list of boards. */
   useEffect(() => {
-    const { match : { params: {boardId = null} = {} } ={} } = props;
-    
     dispatch(fetchBoardDetails({user_id:userId, board_id: boardId}))
-  }, [userId, dispatch]);
+  }, [userId, boardId, dispatch]);
 
   if(isLoading) {
     return <Loader />
   }
 
+  console.log({taskList})
+
   return (
     <Fragment>
-      <span>Board Details</span>
+      <TaskLane taskList={taskList} />
     </Fragment>
     
   ) 

@@ -51,8 +51,6 @@ const Dashboard = () => {
     [ name, setName ] =  useState(""),
     [ nameError, setNameError] = useState("");
   
-  console.log({boardModalState})
-
   /**Get list of boards. */
   useEffect(() => {
     // debugger;

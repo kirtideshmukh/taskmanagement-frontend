@@ -20,7 +20,6 @@ export const initialState = {
 };
 
 const boardReducer = (state = initialState, action = {}) => {
-  console.log("=====", action)
   switch (action.type) {
     case boardActions.boardListFetchInitiated:
       return { ...state, isLoading: true };
@@ -49,9 +48,6 @@ const boardReducer = (state = initialState, action = {}) => {
     case boardActions.boardCreationSucceeded: {
       let boardModalState = initialState.boardModalState
       boardModalState.isOpen = false
-      console.log("****", initialState.boardModalState)
-      console.log({boardModalState})
-      console.log("&&&&&&&&===========", { ...state, ...boardModalState})
       return { ...state, ...boardModalState}
     }
     case boardActions.boardDeletionSucceeded:
