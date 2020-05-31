@@ -12,7 +12,7 @@ import { dangerNotification } from "notificationStore";
 
 export function* fetchBoardList(action = {}) {
   try {
-    const { payload: {params = {} = {}}} = action;
+    const { payload: {params = {}}  ={}} = action;
     const response = yield getBoardsApi(params),
       { data } = response || {};
     yield put(fetchingBoardListSucceeded(data));
