@@ -4,7 +4,7 @@ import { takeLatest, put } from "redux-saga/effects";
 
 // import getFormErrors from "helpers/serverErrorsHelper";
 
-import boardActions, {
+import carBrandActions, {
   boardCreationSucceeded,
   boardCreationFailed,
   fetchBoardList
@@ -32,5 +32,5 @@ export function* createBoard(action) {
 }
 
 export function* createBoardSaga() {
-  yield takeLatest(boardActions.boardCreationInitiated, createBoard);
+  yield takeLatest(carBrandActions.boardCreationInitiated, createBoard);
 }

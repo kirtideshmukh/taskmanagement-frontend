@@ -7,11 +7,13 @@ export const initialState = {
   isSubmitting: false,
   serverErrors: [],
   total_count: 0,
-  modalState: false,
   totalBoards: [],
   filteredBoards: [],
   boardList: [],
   boardModalState: {
+    isOpen: false
+  },
+  deleteBoardModalState: {
     isOpen: false
   }
 };
@@ -25,9 +27,9 @@ const boardReducer = (state = initialState, action = {}) => {
     case boardActions.boardUpdationInitiated:
       return { ...state, isSubmitting: true };
     case boardActions.boardListFetchingFailed:
-    case boardActions.boardCreationFailed:
     case boardActions.boardUpdationSucceeded:
     case boardActions.boardUpdationFailed:
+    case boardActions.boardDeletionInitiated:
     case boardActions.toggleModalState:
       return { ...state, ...action.payload };
     case boardActions.boardListFetchingSucceeded: {
@@ -42,8 +44,18 @@ const boardReducer = (state = initialState, action = {}) => {
         filteredBrands: brandList
       };
     }
+    case boardActions.boardCreationFailed:
     case boardActions.boardCreationSucceeded: {
-      return { ...state, ...action.payload, boardModalState: initialState.boardModalState}
+      let boardModalState = initialState.boardModalState
+      boardModalState.isOpen = false
+      console.log("****", initialState.boardModalState)
+      console.log({boardModalState})
+      console.log("&&&&&&&&===========", { ...state, ...boardModalState})
+      return { ...state, ...boardModalState}
+    }
+    case boardActions.boardDeletionSucceeded:
+    case boardActions.boardDeletionFailed: {
+      return { ...state, ...action.payload, deleteBoardModalState: initialState.deleteBoardModalState}
     }
     case boardActions.updateFilteredBoards: {
       const { payload } = action,

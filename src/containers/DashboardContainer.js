@@ -48,6 +48,8 @@ const Dashboard = () => {
     { boardList, isLoading, boardModalState } = useSelector(state => state.boardReducer),
     [ name, setName ] =  useState(""),
     [ nameError, setNameError] = useState("");
+  
+  console.log({boardModalState})
 
   /**Get list of boards. */
   useEffect(() => {
@@ -75,7 +77,7 @@ const Dashboard = () => {
 
     const nameError = validateName(),
       params = {
-        name: name.trim().toUpperCase(),
+        name: name.trim(),
         user_id: userId  
       };
 
@@ -85,7 +87,7 @@ const Dashboard = () => {
       /**When editing a record, call update api
        * Else call create-brand api.
        */
-      createBoard(params);
+      dispatch(createBoard(params));
     }
   };
 

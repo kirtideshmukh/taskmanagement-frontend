@@ -10,6 +10,9 @@ const boardActions = {
   boardUpdationInitiated: "BOARD_UPDATION__INITIATED",
   boardUpdationSucceeded: "BOARD_UPDATION_SUCCEEDED",
   boardUpdationFailed: "BOARD_UPDATION_FAILED",
+  boardDeletionInitiated: " BOARD_DELETION_INITIATED",
+  boardDeletionSucceeded: "BOARD_DELETION_SUCCEEDED",
+  boardDeletionFailed: "BOARD_DELETION_FAILED",
   resetToInitialState: "RESET_BOARD_REDUCER_TO_INITAIL_STATE",
   toggleModalState: "TOGGLE_MODAL_STATE"
 };
@@ -68,6 +71,13 @@ export const boardCreationFailed = serverErrors => ({
     serverErrors
   }
 });
+
+export const deleteBoard = params => ({
+  type: boardActions.boardDeletionInitiated,
+  payload: {
+    params
+  }
+})
 
 export const updateBoard = params => ({
   type: boardActions.boardUpdationInitiated,
