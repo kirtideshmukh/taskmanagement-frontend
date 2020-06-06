@@ -21,8 +21,44 @@ const boardActions = {
   boardDetailsFetchingFailed: "BOARD_FETCHING_FAILED",
   searchInitiated: "SERACH_INITIATED",
   searchSucceeded: "SEARCH_SUCCEEDED",
-  searchFailed: "SEARCH_FAILED"
+  searchFailed: "SEARCH_FAILED",
+  fetchLabels: "FETCH_LABELS",
+  fetchingLabelsSucceeded: "FETCHING_LABELS_SUCCEEDED",
+  fetchPriorites: "FETCH_PRIORITIES",
+  fetchingPrioritiesSucceeded: "FETCHING_PRIORITIES_SUCCEEDED",
+  fetchStatusList: "FETCH_STATUS_LIST",
+  fetchingStatusListSucceeded: "FETCHING_STATUS_LIST_SUCCEEDED"
 };
+
+export const fetchLabels = () => ({
+  type: boardActions.fetchLabels,
+  payload: {}
+})
+
+export const fetchPriorites = () => ({
+  type: boardActions.fetchPriorites,
+  payload: {}
+})
+
+export const fetchStatusList = () => ({
+  type: boardActions.fetchStatusList,
+  payload: {}
+})
+
+export const fetchingLabelsSucceeded = () => ({
+  type: boardActions.fetchingLabelsSucceeded,
+  payload: {}
+})
+
+export const fetchingPrioritiesSucceeded = () => ({
+  type: boardActions.fetchingPrioritiesSucceeded,
+  payload: {}
+})
+
+export const fetchingStatusListSucceeded = () => ({
+  type: boardActions.fetchingStatusListSucceeded,
+  payload: {}
+})
 
 export const searchInitiated = (params={}) => ({
   type: boardActions.searchInitiated,

@@ -8,6 +8,7 @@ import Loader from "components/shared/Loader";
 
 import { getStatusWiseTasks } from "reducers/boardDetailsReducer";
 import TaskLane from "components/Tasks/TaskLane";
+import { fetchPriorites, fetchStatusList, fetchLabels } from "../actions/boardActions";
 
 
 const boardDetails = {
@@ -97,6 +98,9 @@ const BoardDetailsContainer = (props) => {
   /**Get list of boards. */
   useEffect(() => {
     dispatch(fetchBoardDetails({user_id:userId, board_id: boardId}))
+    dispatch(fetchLabels())
+    dispatch(fetchStatusList())
+    dispatch(fetchPriorites())
   }, [userId, boardId, dispatch]);
 
   // if(isLoading) {

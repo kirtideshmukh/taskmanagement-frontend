@@ -7,7 +7,7 @@ import taskActions, {
   taskDeletionFailed
 } from "actions/taskActions";
 
-import { archiveTaskApi } from "apis/boardApis";
+import { archiveTaskApi } from "apis/taskApis";
 import { fetchBoardDetails } from "./fetchBoardDetailsSaga";
 
 import { successNotification, dangerNotification } from "notificationStore";

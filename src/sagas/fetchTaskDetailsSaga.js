@@ -7,7 +7,7 @@ import taskActions, {
   taskDetailsFetchingFailed
 } from "actions/taskActions";
 
-import { getTaskDetailsApi } from "apis/boardApis";
+import { getTaskDetailsApi } from "apis/taskApis";
 import { dangerNotification } from "notificationStore";
 
 export function* fetchTaskDetails(action = {}) {

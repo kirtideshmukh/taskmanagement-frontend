@@ -41,3 +41,7 @@ export const searchBoardApi =(params = {}) =>{
   return postApi(`${API_ENDPOINTS.board}/${params.board_id}/search`,kwargs)
 
 } 
+
+export const getLabelsApi = () => getApi("label/all", {})
+export const getPrioritiesApi = () => getApi("priority/all", {})
+export const getStatusListApi = () => getApi("status/all", {})
