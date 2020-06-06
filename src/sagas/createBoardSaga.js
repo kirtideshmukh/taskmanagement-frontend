@@ -13,6 +13,7 @@ import boardActions, {
 import { createBoardApi } from "apis/boardApis";
 
 import { successNotification, dangerNotification } from "notificationStore";
+import { USER_ID } from "appConstants";
 
 export function* createBoard(action) {
   const { payload: { params } = {} } = action;
@@ -21,7 +22,8 @@ export function* createBoard(action) {
     yield createBoardApi(params);
     yield put(boardCreationSucceeded());
     yield put(fetchBoardList());
-    yield put(successNotification("Board created successfully!"));
+    yield successNotification("Board created successfully!");
+    yield put(fetchBoardList({user_id: USER_ID}))
   } catch (errorResponse) {
     const { errors, message } = errorResponse;
     // const errorsShown = getFormErrors(errors, message);

@@ -13,7 +13,7 @@ import Loader from "components/shared/Loader";
 import { Button } from "reactstrap";
 import BoardModal from "../components/Dashboard/BoardModal";
 import { getInputFieldValue } from "utils/formHelpers";
-import { BTN_LABELS, ERRORS } from "../appConstants";
+import { BTN_LABELS, ERRORS, USER_ID } from "../appConstants";
 import DeleteBoardModal from "components/Dashboard/DeleteBoardModal";
 
 const boards = [{
@@ -54,7 +54,7 @@ const Dashboard = () => {
   /**Get list of boards. */
   useEffect(() => {
     // debugger;
-    dispatch(fetchBoardList({user_id:userId}))
+    dispatch(fetchBoardList({user_id:USER_ID}))
   }, [userId, dispatch]);
 
   const onChangeName = event => {
@@ -115,7 +115,7 @@ const Dashboard = () => {
   return (
     <Fragment>
       <Button onClick={() => toggleModal(boardModalState)}> Add Board </Button>
-      <BoardList boardList={boards} toggleModal={toggleDeleteModal} />
+      <BoardList boardList={boardList} toggleModal={toggleDeleteModal} />
       {
         boardModalState.isOpen && (
           <BoardModal 

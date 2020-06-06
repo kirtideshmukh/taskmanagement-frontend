@@ -34,14 +34,13 @@ const boardReducer = (state = initialState, action = {}) => {
       return { ...state, ...action.payload };
     case boardActions.boardListFetchingSucceeded: {
       const { payload } = action,
-        { brandList, total_count, isLoading } = payload;
+        { boardList, total_count, isLoading } = payload;
 
       return {
         ...state,
         total_count,
         isLoading,
-        totalBrands: brandList,
-        filteredBrands: brandList
+        boardList
       };
     }
     case boardActions.boardCreationFailed:

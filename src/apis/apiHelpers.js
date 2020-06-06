@@ -31,8 +31,7 @@ const getRequestUrl = reqPath => {
 /**These headers are required in every api-call */
 const defaultHeaders = () => {
   return {
-    "Content-Type": "application/json",
-    Accept: "application/vnd.bidzwheelz; version=1"
+    "Content-Type": "application/json"
   };
 };
 

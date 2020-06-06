@@ -41,3 +41,5 @@ export const PUBLIC_API_END_POINTS = [
 ];
 
 export const UNAUTHORIZED_CODE = 401;
+
+export const USER_ID = 101;
