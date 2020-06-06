@@ -2,13 +2,15 @@ import React, { useEffect, Fragment } from  "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
-  fetchBoardDetails
+  fetchBoardDetails,
 } from "actions/boardActions";
+import { toggleModalState} from "actions/taskActions"
 import Loader from "components/shared/Loader";
 
 import { getStatusWiseTasks } from "reducers/boardDetailsReducer";
 import TaskLane from "components/Tasks/TaskLane";
 import { fetchPriorites, fetchStatusList, fetchLabels } from "../actions/boardActions";
+import TaskModal from "../components/Tasks/TaskModal";
 
 
 const boardDetails = {
@@ -82,7 +84,7 @@ const boardDetails = {
   ]
 }
 
-const taskList = getStatusWiseTasks(boardDetails);
+// const taskList = getStatusWiseTasks(boardDetails);
 
 // console.log({taskList})
 
@@ -91,7 +93,12 @@ const BoardDetailsContainer = (props) => {
     { userId } = useSelector(state => state.appReducer),
     { boardDetails, 
     isLoading,
-    //  taskList 
+     taskList,
+      taskModalState,
+      deleteTaskModalState,
+      statusList,
+      priorities,
+      labels
      } = useSelector(state => state.boardDetailsReducer),
     { match : { params: {boardId = null} = {} } ={} } = props;
   
@@ -103,15 +110,36 @@ const BoardDetailsContainer = (props) => {
     // dispatch(fetchPriorites()) //TODO: resolve saga issue
   }, [userId, boardId, dispatch]);
 
-  // if(isLoading) {
-  //   return <Loader />
-  // }
+  
+   const toggleDeleteModal = (deletedTaskId) => {
+    deleteTaskModalState.isOpen = !deleteTaskModalState.isOpen;
+    deleteTaskModalState.taskId = deletedTaskId;
+    
+    dispatch(toggleModalState(deleteTaskModalState));
+  }
 
-  console.log({taskList})
+  const toggleModal = ( taskId) =>{
+    taskModalState.isOpen = !taskModalState.isOpen;
+    taskModalState.taskId = taskId
+    
+    dispatch(toggleModalState(taskModalState));
+  }
+
+
+  console.log({taskList, statusList, labels, priorities})
 
   return (
     <Fragment>
-      <TaskLane taskList={taskList} />
+      <TaskLane taskList={taskList}  toggleModal={toggleModal} toggleDeleteModal={toggleDeleteModal}/>
+      {
+        taskModalState.isOpen && (
+          <TaskModal
+            statusList={statusList}
+            priorities={priorities}
+            labels={labels}
+          />
+        )
+      }
     </Fragment>
     
   ) 

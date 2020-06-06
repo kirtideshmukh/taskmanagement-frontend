@@ -8,18 +8,29 @@ export const initialState = {
   taskStatus: [],
   labels: [],
   priorities: [],
-  statusList: []
+  statusList: [],
+  taskList: [],
+  taskModalState: {
+    isOpen: false,
+    taskId: null
+  },
+  deleteTaskModalState: {
+    isOpen: false,
+    taskId: null
+  }
 };
 
 export const getStatusWiseTasks  = (tasks = [], taskStatus = []) => {
-  return taskStatus.map(status => {
-    const { name: key } = status,
+  let value = [];
+  return taskStatus.map(status => { 
     value = tasks.filter(task => task.status === status.name)
     return {
-      [key]: value
+      [status]: value  || []
     }
   })
 }
+
+export const getKeyValuePairs = (arr = []) => arr.map(ele =>{ return  {label: ele, value: ele} })
 
 const boardDetailsReducer = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -30,10 +41,22 @@ const boardDetailsReducer = (state = initialState, action = {}) => {
     case boardActions.fetchPriorites:
     case boardActions.fetchStatusList:
     case boardActions.fetchingLabelsSucceeded:
+      return {
+        ...state,
+        labels: getKeyValuePairs(action.payload.data)
+      }
     case boardActions.fetchingPrioritiesSucceeded:
+      return {
+        ...state,
+        priorities: getKeyValuePairs(action.payload.data)
+      }
     case boardActions.fetchingStatusListSucceeded:
-      return { ...state, ...action.payload };
+      return {
+        ...state,
+        statusList: getKeyValuePairs(action.payload.data)
+      }
     case boardActions.searchInitiated:
+      return { ...state, ...action.payload };
     case boardActions.searchSucceeded:{
       const { tasks} = action.payload || {};
       return {
@@ -45,6 +68,7 @@ const boardDetailsReducer = (state = initialState, action = {}) => {
       const { payload } = action,
         { boardDetails } = payload;
 
+      console.log({boardDetails});
       return {
         ...state,
         isLoading: false,
