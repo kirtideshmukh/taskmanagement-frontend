@@ -13,6 +13,8 @@ export default class TaskForm extends React.Component {
     description:"",
     priority:"Low",
     label:"None",
+    due_date:null,
+    due_date_error:"",
   };
   onBlur = e => {
     e.target.value = e.target.value.trim()
@@ -31,12 +33,18 @@ export default class TaskForm extends React.Component {
     let isError = false;
     const errors = {
       titleError: "",
+      due_date_error:"",
     };
     if(this.state.title.length <= 0) {
       isError = true;
       errors.titleError = "Task title not be empty"
     }
     
+    if(Date.parse(this.state.due_date) < new Date()) {
+      isError = true;
+      errors.due_date_error = "Select valid due date"
+    }
+
     this.setState({
       ...this.state,
       ...errors
@@ -57,6 +65,7 @@ export default class TaskForm extends React.Component {
         description:"",
         priority:"Low",
         label:"None",
+        due_date:null,
       });
     }
   };
@@ -139,6 +148,21 @@ export default class TaskForm extends React.Component {
           <MenuItem value={"Others"}>Others</MenuItem>
         </Select>
       </FormControl>
+        <br/>
+
+        <TextField
+        error = {this.state.due_date_error.length > 0}
+        id="date"
+        label="Due date"
+        type="date"
+        name="due_date"
+        defaultValue={new Date()}
+        onChange={e => this.change(e)}
+        helperText={this.state.due_date_error}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
         <br/>
         <br/>
         <Button variant="contained" 
