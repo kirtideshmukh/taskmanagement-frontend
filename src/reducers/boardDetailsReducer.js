@@ -15,7 +15,7 @@ export const initialState = {
 export const getStatusWiseTasks  = (tasks = [], taskStatus = []) => {
   let value = [];
   return taskStatus.map(status => { 
-    value = tasks.filter(task => task.status === status.name)
+    value = tasks.filter(task => task.status === status)
     return {
       [status]: value  || []
     }

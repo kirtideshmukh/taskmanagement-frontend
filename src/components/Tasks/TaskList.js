@@ -4,7 +4,6 @@ import { MdModeEdit, MdDelete, MdAdd } from "react-icons/md"
 
 const TaskList = ( {tasks, toggleModal, toggleDeleteModal}) => {
 
-  console.log({tasks});
   return(
     <ListGroup>
       {

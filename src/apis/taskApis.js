@@ -11,8 +11,7 @@ export const getTaskDetailsApi = (params ={}) => {
 }
 
 export const createTaskApi = (params = {}) =>{
-  console.log("$$$$$$$=============", params);
-  return postApi(`${API_ENDPOINTS.board}/${params.board_id}/${API_ENDPOINTS.tasks}`, {});
+  return postApi(`${API_ENDPOINTS.board}/${params.board_id}/${API_ENDPOINTS.tasks}`, params);
 
 }
   

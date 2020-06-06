@@ -55,9 +55,8 @@ export default class TaskForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const { callUpdateTask, callCreateTask, taskId} = this.props;
+    const { callUpdateTask, callCreateTask, taskId, toggleModal, lane} = this.props;
 
-    console.log(this.state);
     const err = this.validate();
     if (!err) {
       
@@ -76,17 +75,13 @@ export default class TaskForm extends React.Component {
         due_date:null,
       });
     }
+
+    toggleModal(taskId, lane)
   };
 
-  onCancel = e => {
-    //TODO
-    console.log("Cancelling the form");
-  };
-  
   
   render() {
     const { labels, statusList, priorities, toggleModal} = this.props;
-    // console.log("=====", this.props)
     
     return (
       <div className="ml-3 mt-3 mb-3">

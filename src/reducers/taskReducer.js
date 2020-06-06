@@ -55,9 +55,9 @@ const taskReducer = (state = initialState, action = {}) => {
     }
     case taskActions.taskCreationFailed:
     case taskActions.taskCreationSucceeded: {
-      let boardModalState = initialState.boardModalState
-      boardModalState.isOpen = false
-      return { ...state, ...boardModalState}
+      // let boardModalState = initialState.boardModalState
+      // boardModalState.isOpen = false
+      return { ...state, ...action.payload}
     }
     case taskActions.taskDeletionSucceeded:
     case taskActions.taskDeletionFailed: {
