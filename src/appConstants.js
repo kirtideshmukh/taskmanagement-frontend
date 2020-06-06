@@ -23,7 +23,8 @@ export const ERRORS = {
 export const API_ENDPOINTS = {
   board: "board",
   signUp: "signUp",
-  login: "login"
+  login: "login",
+  tasks: "tasks"
 };
 
 export const HTTP_METHODS = {

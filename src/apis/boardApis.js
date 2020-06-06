@@ -2,7 +2,6 @@
 
 import { getApi, postApi, patchApi, deleteApi } from "./apiHelpers";
 import { API_ENDPOINTS } from "appConstants";
-import { USER_ID } from "../appConstants";
 
 export const getBoardsApi = (kwargs = {}) => getApi(`${API_ENDPOINTS.board}/all`, {});
 
