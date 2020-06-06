@@ -18,7 +18,7 @@ const AppLayoutContainer = () => {
       <div className="container-fluid">
         <Router>
           <Switch>
-            <Redirect exact from={ROUTES.index} to={ROUTES.dashboard} />
+            <Redirect exact from={ROUTES.index} to={ROUTES.login} />
             {routes.map(route => {
               return <RouteWithSubRoutes key={route.key} {...route} />;
             })}      
