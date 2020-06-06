@@ -9,15 +9,36 @@ import { ModalBody, ModalFooter } from "reactstrap"
 import NativeSelect from '@material-ui/core/NativeSelect';
 
 export default class TaskForm extends React.Component {
- state = {
-    title: "",
+  constructor(props) {
+    super(props);
+    const { taskModalState } = props;
+    this.state = {
+    title: taskModalState.title,
     titleError: "",
-    description:"",
-    priority:"Low",
-    label:"",
-    due_date:null,
+    description: taskModalState.desc,
+    priority: taskModalState.priority || "Low",
+    label:taskModalState.labels.length ?  taskModalState.labels[0] : "",
+    due_date: taskModalState.due_date,
     due_date_error:"",
   };
+  }
+ 
+
+  static getDerivedStateFromProps(props, nextProps) {
+    // console.log({props, nextProps})
+    // if(props.taskModalState){
+    //   const { title, priority, labels =[], due_date } = props.taskModalState;
+    //   console.log("=======", labels)
+    //   return {
+    //     title,
+    //     priority,
+    //     label: labels.length ? [0] : "",
+    //     due_date
+    //   }
+    // }
+
+    // return null;
+  }
   onBlur = e => {
     e.target.value = e.target.value.trim()
     this.setState({
@@ -81,7 +102,7 @@ export default class TaskForm extends React.Component {
 
   
   render() {
-    const { labels, statusList, priorities, toggleModal} = this.props;
+    const { labels,  priorities, toggleModal} = this.props;
     
     return (
       <div className="ml-3 mt-3 mb-3">

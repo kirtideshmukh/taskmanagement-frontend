@@ -46,10 +46,17 @@ const BoardDetailsContainer = (props) => {
     dispatch(toggleModalState(deleteTaskModalState));
   }
 
-  const toggleModal = ( taskId =null, lane = null) =>{
+  const toggleModal = (task= {} , lane) =>{
+    const { id = null, title ="", priority ="", desc = "", labels = []} = task || {};
+    console.log({task})
     taskModalState.isOpen = !taskModalState.isOpen;
-    taskModalState.taskId =  taskModalState.isOpen ? null : taskId
-    taskModalState.lane = lane
+    taskModalState.taskId =  id
+    taskModalState.lane = lane;
+    taskModalState.title = title;
+    taskModalState.priority = priority;
+    taskModalState.desc = desc;
+    taskModalState.title = title;
+    taskModalState.labels = labels
     
     dispatch(toggleModalState(taskModalState));
   }
@@ -68,6 +75,7 @@ const BoardDetailsContainer = (props) => {
             modalState={taskModalState.isOpen}
             lane={taskModalState.lane}
             taskId={taskModalState.taskId}
+            taskModalState={taskModalState}
           />
         )
       }

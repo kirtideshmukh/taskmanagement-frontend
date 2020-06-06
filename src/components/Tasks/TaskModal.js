@@ -19,10 +19,15 @@ const TaskModal = (props) => {
     priorities,
     boardId,
     lane,
-    taskId
+    taskId,
+    taskModalState
   } = props;
 
+console.log("******************")
+  console.log({props})
+
   useEffect(() => {
+    
     if(taskId){
       dispatch(fetchTaskDetails({task_id: taskId, board_id: boardId}))
     }
@@ -76,6 +81,8 @@ const TaskModal = (props) => {
           boardId={boardId}
           callCreateTask={callCreateTask}
           callUpdateTask={callUpdateTask}
+          taskDetails={taskDetails}
+          taskModalState={taskModalState}
         />
       
     

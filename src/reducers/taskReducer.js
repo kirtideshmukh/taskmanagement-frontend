@@ -13,7 +13,11 @@ export const initialState = {
   taskModalState: {
     isOpen: false,
     taskId: null,
-    lane: null
+    lane: null,
+    title: "",
+    priority: "",
+    desc: ""
+
   },
   deleteTaskModalState: {
     isOpen: false,
@@ -22,6 +26,7 @@ export const initialState = {
 };
 
 const taskReducer = (state = initialState, action = {}) => {
+  console.log({action})
   switch (action.type) {
     case taskActions.taskDetailsFetchInitiated:
       return { ...state, isLoading: true };
@@ -38,7 +43,12 @@ const taskReducer = (state = initialState, action = {}) => {
         let taskModalState = action.payload.modalState;
       taskModalState.isOpen = modalState.isOpen;
       taskModalState.taskId =  modalState.taskId;
-      taskModalState.lane = modalState.lane
+      taskModalState.title = modalState.title;
+    taskModalState.priority = modalState.priority;
+    taskModalState.desc = modalState.desc;
+    taskModalState.title = modalState.title;
+      taskModalState.lane = modalState.lane;
+      taskModalState.labels = modalState.labels
       return { ...state,  ...taskModalState}
       }
       
