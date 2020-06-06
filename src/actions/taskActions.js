@@ -80,7 +80,7 @@ export const updateTask = params => ({
   }
 });
 
-export const taskDetailsUpdationSucceeded = () => ({
+export const taskUpdationSucceeded = () => ({
   type: taskActions.taskDetailsUpdationSucceeded,
   payload: {
     isSubmitting: false,
@@ -88,7 +88,7 @@ export const taskDetailsUpdationSucceeded = () => ({
   }
 });
 
-export const taskDetailsUpdationFailed = serverErrors => ({
+export const taskUpdationFailed = serverErrors => ({
   type: taskActions.taskDetailsUpdationFailed,
   payload: {
     isSubmitting: false,
@@ -110,7 +110,7 @@ export const taskDetailsFetchingSucceeded = (taskDetails) => ({
   }
 });
 
-export const boardDetailsFetchingFailed = serverErrors => ({
+export const taskDetailsFetchingFailed = serverErrors => ({
   type: taskActions.taskDetailsFetchingFailed,
   payload: {
     isSubmitting: false,

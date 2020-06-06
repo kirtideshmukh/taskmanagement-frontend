@@ -9,6 +9,9 @@ import { searchBoardSaga } from "./searchBoardSaga"
 import { fetchTaskDetailsSaga } from "./fetchTaskDetailsSaga";
 import { createTaskSaga} from "./createTaskSaga"
 import { updateTaskSaga } from "./updateTaskSaga"
+import { fetchLabelsSaga} from "./fetchLabelsSaga"
+import { fetchPrioritiesSaga } from "./fetchPrioritiesSaga"
+import { fetchStatusListSaga } from "./fetchStatusListSaga"
 
 const allSagas = [
   // fetchMyBiddingAmountSaga()
@@ -19,7 +22,10 @@ const allSagas = [
   searchBoardSaga(),
   fetchTaskDetailsSaga(),
   createTaskSaga(),
-  updateTaskSaga()
+  updateTaskSaga(),
+  fetchLabelsSaga(),
+  fetchPrioritiesSaga(),
+  fetchStatusListSaga()
 ];
 
 export default function* rootSaga() {

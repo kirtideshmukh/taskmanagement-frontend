@@ -45,17 +45,17 @@ export const fetchStatusList = () => ({
   payload: {}
 })
 
-export const fetchingLabelsSucceeded = () => ({
+export const labelsFetchingSucceeded = () => ({
   type: boardActions.fetchingLabelsSucceeded,
   payload: {}
 })
 
-export const fetchingPrioritiesSucceeded = () => ({
+export const prioritiesFetchingSucceeded = () => ({
   type: boardActions.fetchingPrioritiesSucceeded,
   payload: {}
 })
 
-export const fetchingStatusListSucceeded = () => ({
+export const statusListFetchingSucceeded = () => ({
   type: boardActions.fetchingStatusListSucceeded,
   payload: {}
 })

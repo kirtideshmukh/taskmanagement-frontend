@@ -30,5 +30,5 @@ export function* updateTask(action) {
 }
 
 export function* updateTaskSaga() {
-  yield takeLatest(taskActions.taskUpdationInitiated, updateTask);
+  yield takeLatest(taskActions.taskDetailsUpdationInitiated, updateTask);
 }

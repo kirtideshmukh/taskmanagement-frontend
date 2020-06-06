@@ -11,7 +11,7 @@ export const initialState = {
   statusList: []
 };
 
-export const getStatusWiseTasks  = (tasks, taskStatus) => {
+export const getStatusWiseTasks  = (tasks = [], taskStatus = []) => {
   return taskStatus.map(status => {
     const { name: key } = status,
     value = tasks.filter(task => task.status === status.name)
@@ -26,6 +26,12 @@ const boardDetailsReducer = (state = initialState, action = {}) => {
     case boardActions.boardDetailsFetchInitiated:
       return { ...state, isLoading: true };
     case boardActions.boardDetailsFetchingFailed:
+    case boardActions.fetchLabels:
+    case boardActions.fetchPriorites:
+    case boardActions.fetchStatusList:
+    case boardActions.fetchingLabelsSucceeded:
+    case boardActions.fetchingPrioritiesSucceeded:
+    case boardActions.fetchingStatusListSucceeded:
       return { ...state, ...action.payload };
     case boardActions.searchInitiated:
     case boardActions.searchSucceeded:{

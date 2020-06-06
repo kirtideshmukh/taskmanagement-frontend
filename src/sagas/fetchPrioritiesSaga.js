@@ -9,10 +9,11 @@ import boardActions, {
 import { getPrioritiesApi } from "apis/boardApis";
 import { dangerNotification } from "notificationStore";
 
-export function* fetchPriorities(action = {}) {
+export function* fetchPriorities() {
+  console.log("111111111111111")
   try {
-    const { payload: {params = {}}  ={}} = action;
-    const response = yield getPrioritiesApi(params),
+   
+    const response = yield getPrioritiesApi(),
       { data } = response || {};
     yield put(prioritiesFetchingSucceeded(data));
   } catch (error) {
