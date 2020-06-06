@@ -16,6 +16,8 @@ import { getInputFieldValue } from "utils/formHelpers";
 import { BTN_LABELS, ERRORS, USER_ID } from "../appConstants";
 import DeleteBoardModal from "components/Dashboard/DeleteBoardModal";
 
+import "../components/Dashboard/dashboard.css";
+
 const boards = [{
   id: 1,
   name: "Board 1"
@@ -88,6 +90,7 @@ const Dashboard = () => {
        * Else call create-brand api.
        */
       dispatch(createBoard(params));
+      setName("")
     }
   };
 
@@ -116,7 +119,7 @@ const Dashboard = () => {
     <Fragment>
       <Button onClick={() => toggleModal(boardModalState)}> Add Board </Button>
       {/* <BoardList boardList={boardList} toggleModal={toggleDeleteModal} /> */}
-      <BoardList boardList={boards} toggleModal={toggleDeleteModal} />
+      <BoardList boardList={boardList} toggleModal={toggleDeleteModal} />
       {
         boardModalState.isOpen && (
           <BoardModal 
