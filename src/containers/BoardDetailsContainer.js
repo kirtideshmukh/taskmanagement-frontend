@@ -12,94 +12,22 @@ import TaskLane from "components/Tasks/TaskLane";
 import { fetchPriorites, fetchStatusList, fetchLabels } from "../actions/boardActions";
 import TaskModal from "../components/Tasks/TaskModal";
 
-
-const boardDetails = {
-  task_status : [
-    {
-    id: 1,
-    name: "To do"
-  },
-  {
-    id: 2,
-    name: "In progress"
-  },
-  {
-    id: 3,
-    name: "Done"
-  }  
-  ],
-  tasks: [
-    {
-      id: 1,
-      title: "BreakFast",
-      status: "To do",
-      desc: " task 1",
-      creation_date: null,
-      update_date: null,
-      due_date: null,
-      priority: "high",
-      label_id: "1",
-      is_archived: false,
-      board_id: 1
-    },
-    {
-      id: 2,
-      title: "Lunc",
-      status: "To do",
-      desc: " task 2",
-      creation_date: null,
-      update_date: null,
-      due_date: null,
-      priority: "high",
-      label_id: "2",
-      is_archived: false,
-      board_id: 1
-    },
-    {
-      id: 3,
-      title: "Study",
-      status: "In progress",
-      desc: " task 3",
-      creation_date: null,
-      update_date: null,
-      due_date: null,
-      priority: "high",
-      label_id: "4",
-      is_archived: false,
-      board_id: 1
-    },
-    {
-      id: 4,
-      title: "Sleep",
-      status: "Done",
-      desc: " task 4",
-      creation_date: null,
-      update_date: null,
-      due_date: null,
-      priority: "high",
-      label_id: "4",
-      is_archived: false,
-      board_id: 1
-    }
-  ]
-}
-
-// const taskList = getStatusWiseTasks(boardDetails);
-
-// console.log({taskList})
-
 const BoardDetailsContainer = (props) => {
   const dispatch = useDispatch(),
     { userId } = useSelector(state => state.appReducer),
     { boardDetails, 
     isLoading,
      taskList,
-      taskModalState,
-      deleteTaskModalState,
+      
       statusList,
       priorities,
       labels
      } = useSelector(state => state.boardDetailsReducer),
+     { 
+      taskModalState,
+      deleteTaskModalState,
+      
+     } = useSelector(state => state.taskReducer),
     { match : { params: {boardId = null} = {} } ={} } = props;
   
   /**Get list of boards. */
@@ -118,15 +46,14 @@ const BoardDetailsContainer = (props) => {
     dispatch(toggleModalState(deleteTaskModalState));
   }
 
-  const toggleModal = ( taskId) =>{
+  const toggleModal = ( taskId, lane) =>{
+    console.log("toggle modal")
     taskModalState.isOpen = !taskModalState.isOpen;
-    taskModalState.taskId = taskId
+    taskModalState.taskId =  taskModalState.isOpen ? null : taskId
+    taskModalState.lane =  taskModalState.isOpen ? null : lane
     
     dispatch(toggleModalState(taskModalState));
   }
-
-
-  console.log({taskList, statusList, labels, priorities})
 
   return (
     <Fragment>
@@ -137,6 +64,11 @@ const BoardDetailsContainer = (props) => {
             statusList={statusList}
             priorities={priorities}
             labels={labels}
+            boardId={boardId}
+            toggleModal={toggleModal}
+            modalState={taskModalState.isOpen}
+            lane={taskModalState.lane}
+            taskId={taskModalState.taskId}
           />
         )
       }

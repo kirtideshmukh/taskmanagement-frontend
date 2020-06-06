@@ -10,13 +10,8 @@ export const initialState = {
   totalBoards: [],
   filteredBoards: [],
   boardList: [],
-  boardModalState: {
-    isOpen: false
-  },
-  deleteBoardModalState: {
-    isOpen: false,
-    boardId: null
-  }
+  
+  
 };
 
 const boardReducer = (state = initialState, action = {}) => {

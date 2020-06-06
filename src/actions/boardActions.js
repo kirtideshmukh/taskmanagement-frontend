@@ -15,7 +15,7 @@ const boardActions = {
   boardDeletionFailed: "BOARD_DELETION_FAILED",
   resetListReducerToInitialState: "RESET_BOARD_LIST_REDUCER_TO_INITAIL_STATE",
   resetDetailsReducerToInitialState: "RESET_BOARD_DETAILS_REDUCER_TO_INITIAL_STATE",
-  toggleModalState: "TOGGLE_MODAL_STATE",
+  toggleModalState: "TOGGLE_TASK_MODAL_STATE",
   boardDetailsFetchInitiated: "BOARD_FETCH_INITIATED",
   boardDetailsFetchingSucceeded: "BOARD_FETCHING_SUCCEEDED",
   boardDetailsFetchingFailed: "BOARD_FETCHING_FAILED",

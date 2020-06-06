@@ -1,6 +1,6 @@
 /** @format */
 
-import boardActions from "actions/boardActions";
+import taskActions from "actions/taskActions";
 
 export const initialState = {
   isLoading: false,
@@ -10,29 +10,39 @@ export const initialState = {
   totalBoards: [],
   filteredBoards: [],
   taskDetails: [],
-  boardModalState: {
-    isOpen: false
-  },
-  deleteBoardModalState: {
+  taskModalState: {
     isOpen: false,
-    boardId: null
+    taskId: null,
+    lane: null
+  },
+  deleteTaskModalState: {
+    isOpen: false,
+    taskId: null
   }
 };
 
 const taskReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case boardActions.taskDetailsFetchInitiated:
+    case taskActions.taskDetailsFetchInitiated:
       return { ...state, isLoading: true };
-    case boardActions.taskCreationInitiated:
-    case boardActions.taskUpdationInitiated:
+    case taskActions.taskCreationInitiated:
+    case taskActions.taskUpdationInitiated:
       return { ...state, isSubmitting: true };
-    case boardActions.taskDetailsFetchingFailed:
-    case boardActions.taskUpdationSucceeded:
-    case boardActions.taskUpdationFailed:
-    case boardActions.taskDeletionInitiated:
-    case boardActions.toggleModalState:
-      return { ...state, ...action.payload };
-    case boardActions.taskDetailsFetchingSucceeded: {
+    case taskActions.taskDetailsFetchingFailed:
+    case taskActions.taskUpdationSucceeded:
+    case taskActions.taskUpdationFailed:
+    case taskActions.taskDeletionInitiated:
+    case taskActions.toggleModalState:
+      {
+        const { modalState } = action.payload || {};
+        let taskModalState = action.payload.modalState;
+      taskModalState.isOpen = modalState.isOpen;
+      taskModalState.taskId =  modalState.taskId;
+      taskModalState.lane = modalState.lane
+      return { ...state,  ...taskModalState}
+      }
+      
+    case taskActions.taskDetailsFetchingSucceeded: {
       const { payload } = action,
         { taskDetails, total_count, isLoading } = payload;
 
@@ -43,20 +53,20 @@ const taskReducer = (state = initialState, action = {}) => {
         taskDetails
       };
     }
-    case boardActions.taskCreationFailed:
-    case boardActions.taskCreationSucceeded: {
+    case taskActions.taskCreationFailed:
+    case taskActions.taskCreationSucceeded: {
       let boardModalState = initialState.boardModalState
       boardModalState.isOpen = false
       return { ...state, ...boardModalState}
     }
-    case boardActions.taskDeletionSucceeded:
-    case boardActions.taskDeletionFailed: {
+    case taskActions.taskDeletionSucceeded:
+    case taskActions.taskDeletionFailed: {
       let deleteBoardModalState = initialState.deleteBoardModalState;
       deleteBoardModalState.isOpen = false;
       deleteBoardModalState.boardId =  null;
       return { ...state, ...action.payload, ...deleteBoardModalState}
     }
-    case boardActions.updateFilteredBoards: {
+    case taskActions.updateFilteredBoards: {
       const { payload } = action,
         { filteredBrands } = payload;
       return {
@@ -64,7 +74,7 @@ const taskReducer = (state = initialState, action = {}) => {
         filteredBrands
       };
     }
-    case boardActions.resetListReducerToInitialState:
+    case taskActions.resetListReducerToInitialState:
       return initialState;
     default:
       return state;

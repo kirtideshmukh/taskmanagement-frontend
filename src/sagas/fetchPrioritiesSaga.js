@@ -10,7 +10,6 @@ import { getPrioritiesApi } from "apis/boardApis";
 import { dangerNotification } from "notificationStore";
 
 export function* fetchPriorities() {
-  console.log("111111111111111")
   try {
    
     const response = yield getPrioritiesApi(),

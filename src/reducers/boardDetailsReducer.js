@@ -9,15 +9,7 @@ export const initialState = {
   labels: [],
   priorities: [],
   statusList: [],
-  taskList: [],
-  taskModalState: {
-    isOpen: false,
-    taskId: null
-  },
-  deleteTaskModalState: {
-    isOpen: false,
-    taskId: null
-  }
+  taskList: []
 };
 
 export const getStatusWiseTasks  = (tasks = [], taskStatus = []) => {

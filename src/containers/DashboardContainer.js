@@ -114,8 +114,7 @@ const Dashboard = () => {
   if(isLoading) {
     return <Loader />
   }
-  console.log({boardModalState});
-
+  
   return (
     <Fragment>
       <Button onClick={() => toggleModal(boardModalState)}> Add Board </Button>

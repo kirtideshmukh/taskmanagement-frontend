@@ -5,14 +5,15 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { ModalBody, ModalFooter } from "reactstrap"
 
 export default class TaskForm extends React.Component {
   state = {
     title: "",
     titleError: "",
     description:"",
-    priority:"Low",
-    label:"None",
+    priority:"",
+    label:"",
   };
   onBlur = e => {
     e.target.value = e.target.value.trim()
@@ -68,15 +69,13 @@ export default class TaskForm extends React.Component {
   
   
   render() {
+    const { labels, statusList, priorities, toggleModal} = this.props;
+    console.log("=====", this.props)
+    
     return (
-      <div style={{ 
-        marginLeft: "35%",
-        marginRight: "25%",
-        justifyContent: "center",
-        backgroundColor: "#f2f2f2",
-        padding: "30px"
-        }}>
+      <div className="ml-3 mt-3 mb-3">
       <form>
+        <ModalBody>
         <TextField
           error = {this.state.titleError.length > 0}
           name="title"
@@ -139,10 +138,13 @@ export default class TaskForm extends React.Component {
           <MenuItem value={"Others"}>Others</MenuItem>
         </Select>
       </FormControl>
+      </ModalBody>
         <br/>
         <br/>
+        <ModalFooter>
         <Button variant="contained" 
-        color="primary"  
+        color="primary"
+        className="mr-2"
         onClick={e => this.onSubmit(e)}>
         Save
         </Button>
@@ -150,9 +152,10 @@ export default class TaskForm extends React.Component {
         <Button variant="contained" 
         color="secondary"  
         paddingLeft = "15%"
-        onClick= {e => this.onCancel(e)}>
+        onClick= {toggleModal}>
         Cancel
         </Button>
+        </ModalFooter>
       </form>
       </div>
     )

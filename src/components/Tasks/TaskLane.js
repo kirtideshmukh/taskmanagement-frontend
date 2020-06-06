@@ -6,11 +6,7 @@ import { GoDiffAdded } from "react-icons/go"
 
 const TaskLane = (props) => {
   const { taskList, toggleModal, toggleDeleteModal } = props;
-  console.log({taskList})
-  taskList.map((statusWiseTasks, index) => {
-    console.log(Object.keys(statusWiseTasks)[0])
-    console.log(Object.values(statusWiseTasks)[0])
-  })
+ 
   return (
     <Row>
       {
@@ -20,7 +16,7 @@ const TaskLane = (props) => {
         return (
         <Col key={index}>         
          <Card className="mt-3 mb-3">
-            <CardTitle className="lane-title"><strong>{key}</strong> <GoDiffAdded id="add-task-icon" onClick={()=> toggleModal(null) }/></CardTitle>
+            <CardTitle className="lane-title"><strong>{key}</strong> <GoDiffAdded id="add-task-icon" onClick={()=> toggleModal(null, key) }/></CardTitle>
             <CardBody>
               <TaskList tasks={value}  toggleModal={toggleModal} toggleDeleteModal={toggleDeleteModal}/>
             </CardBody>
