@@ -8,6 +8,8 @@ import { ROUTES } from "appConstants";
 import DashboardContainer from "containers/DashboardContainer";
 import BoardDetailsContainer from "containers/BoardDetailsContainer";
 
+import LoginForm from "./components/Login/LoginForm"
+import SignUpForm from "./components/SignUp/SignUpForm"
 // import RouteHelperHoC from "HoCs/routeHelperHoC";
 
 export const routes = [
@@ -17,17 +19,17 @@ export const routes = [
     key: "dashboard",
     exact: true
   },
-  // {
-  //   path: ROUTES.login,
-  //   component: LoginLayout,
-  //   key: "login"
-  // },
-  // {
-  //   path: ROUTES.signUp,
-  //   component: SignUpComponent,
-  //   key: "sign-up",
-  //   exact: true
-  // },
+  {
+    path: ROUTES.login,
+    component: LoginForm,
+    key: "login"
+  },
+  {
+    path: ROUTES.signUp,
+    component: SignUpForm,
+    key: "sign-up",
+    exact: true
+  },
   // {
   //   path: ROUTES.setPassword,
   //   component: SetPasswordComponent,

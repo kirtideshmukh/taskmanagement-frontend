@@ -115,7 +115,8 @@ const Dashboard = () => {
   return (
     <Fragment>
       <Button onClick={() => toggleModal(boardModalState)}> Add Board </Button>
-      <BoardList boardList={boardList} toggleModal={toggleDeleteModal} />
+      {/* <BoardList boardList={boardList} toggleModal={toggleDeleteModal} /> */}
+      <BoardList boardList={boards} toggleModal={toggleDeleteModal} />
       {
         boardModalState.isOpen && (
           <BoardModal 
