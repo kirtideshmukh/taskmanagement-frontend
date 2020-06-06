@@ -11,7 +11,7 @@ export const getBoardDetailsApi = (params ={}) => {
     user_id: params.user_id
   }
 
-  return postApi(`${API_ENDPOINTS.board}/${params.board_id}`,{});
+  return getApi(`${API_ENDPOINTS.board}/${params.board_id}`,{});
 }
 
 export const createBoardApi = (kwargs = {}) =>

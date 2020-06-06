@@ -101,10 +101,10 @@ const Dashboard = () => {
     dispatch(toggleModalState(deleteBoardModalState));
   }
 
-  const toggleModal = (modalState) =>{
-    modalState.isOpen = !modalState.isOpen;
+  const toggleModal = () =>{
+    boardModalState.isOpen = !boardModalState.isOpen;
     
-    dispatch(toggleModalState(modalState));
+    dispatch(toggleModalState(boardModalState));
   }
 
   const callDeleteBoard = () => {
@@ -114,6 +114,7 @@ const Dashboard = () => {
   if(isLoading) {
     return <Loader />
   }
+  console.log({boardModalState});
 
   return (
     <Fragment>
