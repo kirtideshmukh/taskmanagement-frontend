@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { ModalBody, ModalFooter } from "reactstrap"
+import NativeSelect from '@material-ui/core/NativeSelect';
 
 export default class TaskForm extends React.Component {
  state = {
@@ -13,7 +14,7 @@ export default class TaskForm extends React.Component {
     titleError: "",
     description:"",
     priority:"Low",
-    label:"None",
+    label:"",
     due_date:null,
     due_date_error:"",
   };
@@ -28,7 +29,6 @@ export default class TaskForm extends React.Component {
       [e.target.name]: e.target.value
     });
   };
-
 
   validate = () => {
     let isError = false;
@@ -55,6 +55,7 @@ export default class TaskForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
+    const { lane, taskId, boardId} = this.props;
 
     console.log(this.state);
     const err = this.validate();
@@ -65,7 +66,7 @@ export default class TaskForm extends React.Component {
         titleError: "",
         description:"",
         priority:"Low",
-        label:"None",
+        label:"",
         due_date:null,
       });
     }
@@ -131,36 +132,40 @@ export default class TaskForm extends React.Component {
         <br/>
       <FormControl required >
         <InputLabel >Priority</InputLabel>
-        <Select
-
-          name="priority" 
-          value={this.state.priority}
-          onChange={e => this.change(e)}
+        <NativeSelect
+        name="priority"
+        value="Low"
+        onChange={e => this.change(e)}
+        inputProps={{
+        name: 'priority',
+        }}
         >
-         
-          <MenuItem value={"High"}>High</MenuItem>
-          <MenuItem value={"Medium"}>Medium</MenuItem>
-          <MenuItem value={"Low"}>Low</MenuItem>
-        </Select>
-      </FormControl>
+        <option value={"High"}>High</option>
+        <option value={"Medium"}>Medium</option>
+        <option value={"Low"}>Low</option>
+        </NativeSelect>
+        </FormControl>
        
 
       <br/>
        <br/>
-      <FormControl>
-        <InputLabel >Label</InputLabel>
-        <Select
-
-          name="label" 
-          value={this.state.label}
-          onChange={e => this.change(e)}
+      <FormControl >
+        <InputLabel shrink>
+        Label
+        </InputLabel>
+        <NativeSelect
+        name="label"
+        onChange={e => this.change(e)}
+        inputProps={{
+        name: 'label',
+        }}
         >
-         <MenuItem value={"None"}>None</MenuItem>
-          <MenuItem value={"Personal"}>Personal</MenuItem>
-          <MenuItem value={"Work"}>Work</MenuItem>
-          <MenuItem value={"Shopping"}>Shopping</MenuItem>
-          <MenuItem value={"Others"}>Others</MenuItem>
-        </Select>
+        <option value="">None</option>
+        <option value={"Personal"}>Personal</option>
+        <option value={"Work"}>Work</option>
+        <option value={"Shopping"}>Shopping</option>
+        <option value={"Others"}>Others</option>
+        </NativeSelect>
       </FormControl>
       </ModalBody>
         <br/>

@@ -9,7 +9,7 @@ export const initialState = {
   total_count: 0,
   totalBoards: [],
   filteredBoards: [],
-  taskDetails: [],
+  taskDetails: {},
   taskModalState: {
     isOpen: false,
     taskId: null,
