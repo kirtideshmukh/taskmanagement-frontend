@@ -55,11 +55,17 @@ export default class TaskForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const { lane, taskId, boardId} = this.props;
+    const { callUpdateTask, callCreateTask, taskId} = this.props;
 
     console.log(this.state);
     const err = this.validate();
     if (!err) {
+      
+      if(taskId) {
+        callUpdateTask(this.state);
+      } else {
+        callCreateTask(this.state);
+      }
       // clear form
       this.setState({
         title: "",
@@ -80,7 +86,7 @@ export default class TaskForm extends React.Component {
   
   render() {
     const { labels, statusList, priorities, toggleModal} = this.props;
-    console.log("=====", this.props)
+    // console.log("=====", this.props)
     
     return (
       <div className="ml-3 mt-3 mb-3">

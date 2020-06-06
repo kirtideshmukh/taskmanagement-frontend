@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from  "react";
 import { useSelector, useDispatch } from "react-redux";
 
 
-import { fetchTaskDetails } from "actions/taskActions";
+import { fetchTaskDetails, createTask, updateTask } from "actions/taskActions";
 
 import Modal from "components/Modals/index";
 import FormInput from "components/shared/FormInput/FormInput.js";
@@ -29,7 +29,34 @@ const TaskModal = (props) => {
     
   }, [taskId, boardId, dispatch]);
 
-  
+  const callCreateTask = (formData = {}) => {
+    const { title, description, label, priority, due_date} = formData;
+    const params = {
+      board_id: boardId,
+      status: lane,
+      title,
+      desc: description,
+      label: [label],
+      priority,
+      due_date
+    }
+    dispatch(createTask(params))
+  }
+
+  const callUpdateTask = (formData = {}) => {
+    const { title, description, label, priority, due_date} = formData;
+    const params = {
+      board_id: boardId,
+      status: lane,
+      task_id: taskId,
+      title,
+      desc: description,
+      label: [label],
+      priority,
+      due_date
+    }
+    dispatch(updateTask(params))
+  }
 
   return (
     <div>
@@ -47,6 +74,8 @@ const TaskModal = (props) => {
           lane={lane}
           taskId={taskId}
           boardId={boardId}
+          callCreateTask={callCreateTask}
+          callUpdateTask={callUpdateTask}
         />
       
     
