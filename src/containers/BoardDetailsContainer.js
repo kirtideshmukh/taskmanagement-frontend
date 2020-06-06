@@ -46,11 +46,10 @@ const BoardDetailsContainer = (props) => {
     dispatch(toggleModalState(deleteTaskModalState));
   }
 
-  const toggleModal = ( taskId, lane) =>{
-    console.log("toggle modal")
+  const toggleModal = ( taskId =null, lane = null) =>{
     taskModalState.isOpen = !taskModalState.isOpen;
     taskModalState.taskId =  taskModalState.isOpen ? null : taskId
-    taskModalState.lane =  taskModalState.isOpen ? null : lane
+    taskModalState.lane = lane
     
     dispatch(toggleModalState(taskModalState));
   }

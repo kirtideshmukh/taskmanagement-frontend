@@ -60,7 +60,6 @@ const boardDetailsReducer = (state = initialState, action = {}) => {
       const { payload } = action,
         { boardDetails } = payload;
 
-      console.log({boardDetails});
       return {
         ...state,
         isLoading: false,
