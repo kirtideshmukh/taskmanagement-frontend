@@ -18,8 +18,26 @@ const boardActions = {
   toggleModalState: "TOGGLE_MODAL_STATE",
   boardDetailsFetchInitiated: "BOARD_FETCH_INITIATED",
   boardDetailsFetchingSucceeded: "BOARD_FETCHING_SUCCEEDED",
-  boardDetailsFetchingFailed: "BOARD_FETCHING_FAILED"
+  boardDetailsFetchingFailed: "BOARD_FETCHING_FAILED",
+  searchInitiated: "SERACH_INITIATED",
+  searchSucceeded: "SEARCH_SUCCEEDED",
+  searchFailed: "SEARCH_FAILED"
 };
+
+export const searchInitiated = (params={}) => ({
+  type: boardActions.searchInitiated,
+  payload: {params}
+})
+
+export const searchSucceeded = (taskList) => ({
+  type: boardActions.searchSucceeded,
+  payload: {taskList}
+})
+
+export const searchFailed = () => ({
+  type: boardActions.searchFailed,
+  payload: {}
+})
 
 export const toggleModalState = modalState => ({
   type: boardActions.toggleModalState,

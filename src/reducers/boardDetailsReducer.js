@@ -4,12 +4,15 @@ import boardActions from "actions/boardActions";
 
 export const initialState = {
   isLoading: false,
-  boardDetails: {}
+  boardDetails: {},
+  taskStatus: [],
+  labels: [],
+  priorities: [],
+  statusList: []
 };
 
-export const getStatusWiseTasks  = (boardDetails = {}) => {
-  const { task_status, tasks } = boardDetails;
-  return task_status.map(status => {
+export const getStatusWiseTasks  = (tasks, taskStatus) => {
+  return taskStatus.map(status => {
     const { name: key } = status,
     value = tasks.filter(task => task.status === status.name)
     return {
@@ -24,6 +27,14 @@ const boardDetailsReducer = (state = initialState, action = {}) => {
       return { ...state, isLoading: true };
     case boardActions.boardDetailsFetchingFailed:
       return { ...state, ...action.payload };
+    case boardActions.searchInitiated:
+    case boardActions.searchSucceeded:{
+      const { tasks} = action.payload || {};
+      return {
+        ...state,
+        taskList: getStatusWiseTasks(tasks, state.taskStatus)
+      }
+    }
     case boardActions.boardDetailsFetchingSucceeded: {
       const { payload } = action,
         { boardDetails } = payload;
@@ -32,7 +43,8 @@ const boardDetailsReducer = (state = initialState, action = {}) => {
         ...state,
         isLoading: false,
         boardDetails,
-        taskList: getStatusWiseTasks(boardDetails)
+        taskStatus: boardDetails.task_status || {},
+        taskList: getStatusWiseTasks(boardDetails.tasks, boardDetails.task_status)
       };
     }
     case boardActions.resetDetailsReducerToInitialState:
