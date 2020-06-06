@@ -1,11 +1,10 @@
-import React, { useEffect, Fragment, useState } from  "react";
+import React, { useEffect, Fragment } from  "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
   fetchBoardDetails
 } from "actions/boardActions";
 import Loader from "components/shared/Loader";
-import { Button } from "reactstrap";
 
 import { getStatusWiseTasks } from "reducers/boardDetailsReducer";
 import TaskLane from "components/Tasks/TaskLane";
@@ -100,9 +99,9 @@ const BoardDetailsContainer = (props) => {
     dispatch(fetchBoardDetails({user_id:userId, board_id: boardId}))
   }, [userId, boardId, dispatch]);
 
-  if(isLoading) {
-    return <Loader />
-  }
+  // if(isLoading) {
+  //   return <Loader />
+  // }
 
   console.log({taskList})
 
