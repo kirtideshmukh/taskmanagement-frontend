@@ -130,7 +130,7 @@ export default class TaskForm extends React.Component {
         }}
       />
         <br/>
-      <FormControl required >
+      {/* <FormControl required >
         <InputLabel >Priority</InputLabel>
         <NativeSelect
         name="priority"
@@ -144,7 +144,7 @@ export default class TaskForm extends React.Component {
         <option value={"Medium"}>Medium</option>
         <option value={"Low"}>Low</option>
         </NativeSelect>
-        </FormControl>
+        </FormControl> */}
        
 
       <br/>
@@ -160,11 +160,12 @@ export default class TaskForm extends React.Component {
         name: 'label',
         }}
         >
-        <option value="">None</option>
-        <option value={"Personal"}>Personal</option>
-        <option value={"Work"}>Work</option>
-        <option value={"Shopping"}>Shopping</option>
-        <option value={"Others"}>Others</option>
+          <option value="">None</option>
+          {
+            labels.map(label => {
+              return  <option value={label.value}>{label.label}</option>
+            })
+          }
         </NativeSelect>
       </FormControl>
       </ModalBody>
