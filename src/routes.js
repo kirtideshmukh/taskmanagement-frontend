@@ -6,6 +6,8 @@ import RouteWithSubRoutes from "utils/routesWithSubRoutes";
 import { ROUTES } from "appConstants";
 
 import DashboardContainer from "containers/DashboardContainer";
+import BoardDetailsContainer from "containers/BoardDetailsContainer";
+
 import LoginForm from "./components/Login/LoginForm"
 import SignUpForm from "./components/SignUp/SignUpForm"
 // import RouteHelperHoC from "HoCs/routeHelperHoC";
@@ -34,12 +36,13 @@ export const routes = [
   //   key: "set-password",
   //   exact: true
   // },
-  // {
-  //   path: `${ROUTES.liveBidDetails}/:biddingId${ROUTES.cars}/:carId`,
-  //   component: LiveBidBidderDetails,
-  //   key: "livebid-bid-details",
-  //   exact: true
-  // },
+  {
+    path: `${ROUTES.boards}/:boardId`,
+    component: BoardDetailsContainer,
+    key: "board-details",
+    exact: true
+  }
+  // ,
   // {
   //   path: `${ROUTES.carDetails}/:carId${ROUTES.bids}/:biddingId`,
   //   component: BidCarDetailsComponent,

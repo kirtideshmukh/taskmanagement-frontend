@@ -3,7 +3,8 @@ export const ROUTES = {
   setPassword: "/set-password",
   login: "/login",
   signUp: "/sign-up",
-  index: "/"
+  index: "/",
+  boards: "/boards"
 };
 
 export const BTN_LABELS = {
@@ -22,7 +23,8 @@ export const ERRORS = {
 export const API_ENDPOINTS = {
   board: "board",
   signUp: "signUp",
-  login: "login"
+  login: "login",
+  tasks: "tasks"
 };
 
 export const HTTP_METHODS = {
@@ -40,3 +42,5 @@ export const PUBLIC_API_END_POINTS = [
 ];
 
 export const UNAUTHORIZED_CODE = 401;
+
+export const USER_ID = 101;

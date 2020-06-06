@@ -3,10 +3,14 @@
 import { getApi, postApi, patchApi, deleteApi } from "./apiHelpers";
 import { API_ENDPOINTS } from "appConstants";
 
-export const getBoardsApi = (kwargs = {}) => getApi(`${API_ENDPOINTS.board}/all`, kwargs);
+export const getBoardsApi = (kwargs = {}) => getApi(`${API_ENDPOINTS.board}/all`, {});
+
+export const getBoardDetailsApi = (params ={}) => {
+  return getApi(`${API_ENDPOINTS.board}/${params.board_id}`,{});
+}
 
 export const createBoardApi = (kwargs = {}) =>
-  postApi(API_ENDPOINTS.board, kwargs);
+  postApi(`${API_ENDPOINTS.board}/`, kwargs);
 
 export const updateBoardApi = (params = {}) => {
   const { brand, id } = params,
@@ -24,3 +28,20 @@ export const deleteBoardApi = (params ={}) => {
 
   return deleteApi(`${API_ENDPOINTS.board}/${params.board_id}`, kwargs);
 }
+
+export const searchBoardApi =(params = {}) =>{
+  const kwargs = {
+    status:params.status,
+    to:params.to,
+    from: params.from,
+    label: params.label,
+    priority: params.priority,
+    query: params.query
+  }
+  return postApi(`${API_ENDPOINTS.board}/${params.board_id}/search`,kwargs)
+
+} 
+
+export const getLabelsApi = () => getApi("label/all", {})
+export const getPrioritiesApi = () => getApi("priority/all", {})
+export const getStatusListApi = () => getApi("status/all", {})

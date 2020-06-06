@@ -12,7 +12,7 @@ export const initialState = {
   boardList: [],
   boardModalState: {
     isOpen: false
-  },
+  }, 
   deleteBoardModalState: {
     isOpen: false,
     boardId: null
@@ -20,7 +20,6 @@ export const initialState = {
 };
 
 const boardReducer = (state = initialState, action = {}) => {
-  console.log("=====", action)
   switch (action.type) {
     case boardActions.boardListFetchInitiated:
       return { ...state, isLoading: true };
@@ -35,23 +34,19 @@ const boardReducer = (state = initialState, action = {}) => {
       return { ...state, ...action.payload };
     case boardActions.boardListFetchingSucceeded: {
       const { payload } = action,
-        { brandList, total_count, isLoading } = payload;
+        { boardList, total_count, isLoading } = payload;
 
       return {
         ...state,
         total_count,
         isLoading,
-        totalBrands: brandList,
-        filteredBrands: brandList
+        boardList
       };
     }
     case boardActions.boardCreationFailed:
     case boardActions.boardCreationSucceeded: {
       let boardModalState = initialState.boardModalState
       boardModalState.isOpen = false
-      console.log("****", initialState.boardModalState)
-      console.log({boardModalState})
-      console.log("&&&&&&&&===========", { ...state, ...boardModalState})
       return { ...state, ...boardModalState}
     }
     case boardActions.boardDeletionSucceeded:
@@ -69,7 +64,7 @@ const boardReducer = (state = initialState, action = {}) => {
         filteredBrands
       };
     }
-    case boardActions.resetToInitialState:
+    case boardActions.resetListReducerToInitialState:
       return initialState;
     default:
       return state;

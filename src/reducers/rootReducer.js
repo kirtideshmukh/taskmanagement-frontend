@@ -2,12 +2,16 @@ import { combineReducers } from "redux";
 // import signUpReducer from "./signUpReducer";
 
 import appReducer from "reducers/appReducer";
-import boardReducer from "reducers/boardReducer";
+import boardListReducer from "reducers/boardListReducer";
+import boardDetailsReducer from "reducers/boardDetailsReducer";
+import taskReducer from "reducers/taskReducer"
 
 const rootReducer = combineReducers({
   // signUpReducer
   appReducer,
-  boardReducer
+  boardListReducer,
+  boardDetailsReducer,
+  taskReducer
 });
 
 export default rootReducer;
