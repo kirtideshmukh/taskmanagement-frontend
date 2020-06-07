@@ -10,9 +10,11 @@ import { routes } from "routes";
 import { ROUTES } from "../appConstants";
 import RouteWithSubRoutes from "../utils/routesWithSubRoutes";
 import NavigationBar from "../components/NavBar";
+import { loadLocalStorageState } from "../utils/localStorageHelpers";
 
 const AppLayoutContainer = () => {
   // console.log(getAuthToken());
+  const authToken = loadLocalStorageState() ? loadLocalStorageState().authToken : ""
   return (
     <>
       <ReactNotification />

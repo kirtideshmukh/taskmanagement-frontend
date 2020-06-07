@@ -17,8 +17,8 @@ import { BTN_LABELS, ERRORS, USER_ID } from "../appConstants";
 import DeleteBoardModal from "components/Dashboard/DeleteBoardModal";
 
 import "../components/Dashboard/dashboard.css";
-import { getAuthToken } from "../store";
-import { loadLocalStorageState } from "../utils/localStorageHelpers";
+// import { getAuthToken } from "../store";
+// import { loadLocalStorageState } from "../utils/localStorageHelpers";
 
 const Dashboard = () => {
   const dispatch = useDispatch(),
@@ -26,14 +26,13 @@ const Dashboard = () => {
     { boardList, isLoading, boardModalState, deleteBoardModalState } = useSelector(state => state.boardListReducer),
     [ name, setName ] =  useState(""),
     [ nameError, setNameError] = useState("");
-  console.log("***********",loadLocalStorageState())
-  const authToken =loadLocalStorageState().authToken;
+  
   
   /**Get list of boards. */
   useEffect(() => {
     // debugger;
-    dispatch(fetchBoardList({user_id:USER_ID}))
-  }, [authToken, dispatch]);
+    dispatch(fetchBoardList({}))
+  }, [dispatch]);
 
   const onChangeName = event => {
     setName(getInputFieldValue(event));
@@ -90,6 +89,8 @@ const Dashboard = () => {
   if(isLoading) {
     return <Loader />
   }
+
+  console.log("DASHBOARD=============")
   
   return (
     <Fragment>
