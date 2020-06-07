@@ -25,7 +25,7 @@ const allSagas = [
   createTaskSaga(),
   updateTaskSaga(),
   fetchLabelsSaga(),
-  // fetchPrioritiesSaga(),
+  fetchPrioritiesSaga(),
   fetchStatusListSaga(),
   deleteTaskSaga()
 ];

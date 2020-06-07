@@ -1,8 +1,8 @@
-import React, { useEffect } from  "react";
+import React from  "react";
 import { useSelector, useDispatch } from "react-redux";
 
 
-import { fetchTaskDetails, createTask, updateTask } from "actions/taskActions";
+import { createTask, updateTask } from "actions/taskActions";
 
 import Modal from "components/Modals/index";
 import TaskForm from "./TaskForm";

@@ -26,7 +26,6 @@ export const initialState = {
 };
 
 const taskReducer = (state = initialState, action = {}) => {
-  console.log({action})
   switch (action.type) {
     case taskActions.taskDetailsFetchInitiated:
       return { ...state, isLoading: true };

@@ -33,7 +33,7 @@ const BoardDetailsContainer = (props) => {
     dispatch(fetchBoardDetails({user_id:userId, board_id: boardId}))
     dispatch(fetchLabels())
     dispatch(fetchStatusList())
-    // dispatch(fetchPriorites()) //TODO: resolve saga issue
+    dispatch(fetchPriorites()) //TODO: resolve saga issue
   }, [userId, boardId, dispatch]);
 
   
