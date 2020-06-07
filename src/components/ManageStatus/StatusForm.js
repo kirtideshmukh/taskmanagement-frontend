@@ -1,25 +1,24 @@
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
-import CheckIcon from '@material-ui/icons/Check';
-
 import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
+import { ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 export default class StatusForm extends React.Component {
-  state = {
-    status:"New",
+  constructor(props){
+    super(props);
+    this.state = {
+    status:props.status,
     isCheckDialogueOpen:false,
   };
+  }
+  
  
   onBlur = e => {
     e.target.value = e.target.value.trim()
@@ -38,6 +37,7 @@ export default class StatusForm extends React.Component {
     this.onClickCheckCancel(e);
     e.preventDefault();
     console.log(this.state);
+    this.props.callUpdateTask({status: this.state.status})
 
     this.setState({
 
@@ -58,10 +58,11 @@ export default class StatusForm extends React.Component {
   }
   render() {
     
+    const { toggleModal } = this.props;
     return (
       <div style={{ 
-        marginLeft: "35%",
-        marginRight: "25%",
+        marginLeft: "10%",
+        marginRight: "10%",
         justifyContent: "center",
         backgroundColor: "#f2f2f2",
         padding: "30px"
@@ -69,19 +70,11 @@ export default class StatusForm extends React.Component {
       <form>
 
        <div>
-      <CheckIcon onClick={e => this.onClickCheck(e)}/>
+      
 
-      <Dialog
-        open={this.state.isCheckDialogueOpen}
-        onClose={this.handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        inputProps={{
-        name: 'status',}}
-      >
-        <DialogTitle id="alert-dialog-title">{"Choose a status you want to assign"}</DialogTitle>
-        <DialogContent >
-          <DialogContentText id="alert-dialog-description">
+       
+        <ModalHeader> {"Choose a status you want to assign"}</ModalHeader>
+        <ModalBody> 
             <FormControl >
               <FormLabel   >Status</FormLabel>
               <RadioGroup aria-label="status" name ="status" value={this.state.status} onChange={e => this.change(e)}>
@@ -91,17 +84,17 @@ export default class StatusForm extends React.Component {
               </RadioGroup>
             </FormControl>
 
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
+        
+      </ModalBody>
+      <ModalFooter>
           <Button onClick={e => this.onSubmit(e)} color="primary">
             Save
           </Button>
-          <Button onClick={e =>this.onClickCheckCancel(e)} color="secondary">
+          <Button onClick={toggleModal} color="secondary">
             Cancel
           </Button>
-        </DialogActions>
-      </Dialog>
+          </ModalFooter>
+       
       </div>
       </form>
       </div>

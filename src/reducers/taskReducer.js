@@ -23,6 +23,11 @@ export const initialState = {
   deleteTaskModalState: {
     isOpen: false,
     taskId: null
+  },
+  statusModalState: {
+    isOpen: false,
+    taskId: null,
+    status: ""
   }
 };
 
@@ -78,6 +83,10 @@ const taskReducer = (state = initialState, action = {}) => {
     case taskActions.toggleDeleteModalState: {
       let deleteTaskModalState = action.payload.deleteTaskModalState;
       return { ...state, ...action.payload, ...deleteTaskModalState}
+    }
+    case taskActions.toggleStatusModalState: {
+      let statusModalState = action.payload.statusModalState;
+      return { ...state, ...action.payload, ...statusModalState}
     }
     case taskActions.updateFilteredBoards: {
       const { payload } = action,
