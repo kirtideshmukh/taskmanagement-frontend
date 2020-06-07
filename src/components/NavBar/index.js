@@ -5,7 +5,8 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavbarText
+  NavbarText,
+  Button
 } from 'reactstrap';
 import { ROUTES } from 'appConstants';
 
@@ -14,6 +15,9 @@ const Example = (props) => {
 
   const toggle = () => setIsOpen(!isOpen);
 
+  const handleLogout = ( )=> {
+    console.log("Handle logout");
+  }
   return (
     <div>
       <Navbar color="light" light expand="md">
@@ -35,6 +39,7 @@ const Example = (props) => {
            */}
           <NavbarText>Profile Icon</NavbarText>
         </Collapse>
+        <Button onClick={ e =>handleLogout(e)}>Logout</Button>
       </Navbar>
     </div>
   );
