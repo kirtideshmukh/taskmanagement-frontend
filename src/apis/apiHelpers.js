@@ -97,16 +97,17 @@ export const deleteApi = (reqPath, payload, optionalHeaders = {}) => {
 };
 
 const callApi = async (reqPath, payload, httpMethod, optionalHeaders = {}) => {
+  const finalReqPath = `api/${reqPath}`
   const queryString =
     isGetApiCall(httpMethod) && !isEmptyObject(payload)
       ? `?${getQueryString(payload)}`
       : "";
 
-  const fetchUrl = constructFetchUrl(httpMethod, reqPath, queryString);
+  const fetchUrl = constructFetchUrl(httpMethod, finalReqPath, queryString);
   let headers = { ...defaultHeaders(), ...optionalHeaders };
 
   /**If api requires auth_token, send it in authorization header. */
-  if (isApiRequiringAuthToken(reqPath)) {
+  if (isApiRequiringAuthToken(finalReqPath)) {
     const {
       loggedInUser: { auth_token }
     } = getAppReducer();
