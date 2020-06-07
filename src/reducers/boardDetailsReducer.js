@@ -50,10 +50,10 @@ const boardDetailsReducer = (state = initialState, action = {}) => {
     case boardActions.searchInitiated:
       return { ...state, ...action.payload };
     case boardActions.searchSucceeded:{
-      const { tasks} = action.payload || {};
+      const { taskList} = action.payload || {};
       return {
         ...state,
-        taskList: getStatusWiseTasks(tasks, state.taskStatus)
+        taskList: getStatusWiseTasks(taskList, state.taskStatus)
       }
     }
     case boardActions.boardDetailsFetchingSucceeded: {

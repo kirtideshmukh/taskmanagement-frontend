@@ -13,15 +13,15 @@ export function* searchBoard(action) {
   const { payload: { params } = {} } = action;
 
   try {
-    const { data, message} = yield searchBoardApi(params);
+    const { data} = yield searchBoardApi(params);
     yield put(searchSucceeded(data));
-    yield successNotification(message);
+    yield successNotification("search complete");
   } catch (errorResponse) {
-    const { errors, message } = errorResponse;
+    console.log({errorResponse})
     // const errorsShown = getFormErrors(errors, message);
-    yield dangerNotification(message)
+    yield dangerNotification("error in searching")
     
-    yield put(searchFailed(errors));
+    yield put(searchFailed());
   }
 }
 
