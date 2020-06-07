@@ -15,12 +15,18 @@ const taskActions = {
   taskDeletionFailed: "TASK_DELETION_FAILED",
   resetTaskReducerToInitialState: "RESET_TASK_DETAILS_REDUCER_TO_INITAIL_STATE",
   toggleModalState: "TOGGLE_TASK_MODAL_STATE",
-  toggleDeleteModalState: "TOGGLE_DELETE_MODAL"
+  toggleDeleteModalState: "TOGGLE_DELETE_MODAL",
+  toggleStatusModalState: "TOGGLE_STATUS_MODAL"
 };
 
 export const toggleDeleteModalState = deleteTaskModalState => ({
   type: taskActions.toggleDeleteModalState,
   payload: { deleteTaskModalState, serverErrors: [] }
+})
+
+export const toggleStatusModalState = statusModalState => ({
+  type: taskActions.toggleStatusModalState,
+  payload: { statusModalState, serverErrors: [] }
 })
 
 export const toggleModalState = modalState => ({

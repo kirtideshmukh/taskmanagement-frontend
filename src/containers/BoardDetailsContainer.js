@@ -5,7 +5,7 @@ import {
   fetchBoardDetails,
   searchInitiated
 } from "actions/boardActions";
-import { toggleModalState, deleteTask, toggleDeleteModalState} from "actions/taskActions"
+import { toggleModalState, deleteTask, toggleDeleteModalState, toggleStatusModalState} from "actions/taskActions"
 
 import TaskLane from "components/Tasks/TaskLane";
 import { fetchPriorites, fetchStatusList, fetchLabels } from "../actions/boardActions";
@@ -13,6 +13,7 @@ import TaskModal from "../components/Tasks/TaskModal";
 import DeleteTaskModal from "../components/Tasks/DeleteTaskModal";
 import { Row } from "reactstrap";
 import SearchForm from "../components/Search/SearchForm";
+import StatusModal from "../components/ManageStatus/StatusModal";
 
 const BoardDetailsContainer = (props) => {
   const dispatch = useDispatch(),
@@ -27,7 +28,7 @@ const BoardDetailsContainer = (props) => {
      { 
       taskModalState,
       deleteTaskModalState,
-      
+      statusModalState
      } = useSelector(state => state.taskReducer),
     { match : { params: {boardId = null} = {} } ={} } = props;
   
@@ -45,6 +46,14 @@ const BoardDetailsContainer = (props) => {
     deleteTaskModalState.taskId = deletedTaskId;
     
     dispatch(toggleDeleteModalState(deleteTaskModalState));
+  }
+
+   const toggleStatusModal = (taskId = null, lane =null) => {
+    statusModalState.isOpen = !statusModalState.isOpen;
+    statusModalState.taskId = taskId;
+    statusModalState.status = lane;
+    
+    dispatch(toggleStatusModalState(statusModalState));
   }
 
   const toggleModal = (task= {} , lane) =>{
@@ -80,7 +89,7 @@ const BoardDetailsContainer = (props) => {
        />
       </Row>
      
-      <TaskLane taskList={taskList}  toggleModal={toggleModal} toggleDeleteModal={toggleDeleteModal}/>
+      <TaskLane taskList={taskList}  toggleModal={toggleModal} toggleDeleteModal={toggleDeleteModal} toggleStatusModal={toggleStatusModal}/>
       
       {
         taskModalState.isOpen && (
@@ -103,6 +112,18 @@ const BoardDetailsContainer = (props) => {
             modalState={deleteTaskModalState.isOpen}
             toggleModal={toggleDeleteModal}
             deleteTask={callDeleteTask}
+          />
+        )
+      }
+      {
+        statusModalState.isOpen && (
+          <StatusModal
+            modalState={statusModalState.isOpen}
+            boardId={boardId}
+            taskId={statusModalState.taskId}
+            lane={statusModalState.status}
+            statusList={statusList}
+            toggleModal={toggleStatusModal}
           />
         )
       }
