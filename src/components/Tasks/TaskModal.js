@@ -1,11 +1,10 @@
-import React, { useEffect, Fragment } from  "react";
+import React, { useEffect } from  "react";
 import { useSelector, useDispatch } from "react-redux";
 
 
 import { fetchTaskDetails, createTask, updateTask } from "actions/taskActions";
 
 import Modal from "components/Modals/index";
-import FormInput from "components/shared/FormInput/FormInput.js";
 import TaskForm from "./TaskForm";
 
 const TaskModal = (props) => {
@@ -22,17 +21,6 @@ const TaskModal = (props) => {
     taskId,
     taskModalState
   } = props;
-
-console.log("******************")
-  console.log({props})
-
-  useEffect(() => {
-    
-    if(taskId){
-      dispatch(fetchTaskDetails({task_id: taskId, board_id: boardId}))
-    }
-    
-  }, [taskId, boardId, dispatch]);
 
   const callCreateTask = (formData = {}) => {
     const { title, description, label, priority, due_date} = formData;

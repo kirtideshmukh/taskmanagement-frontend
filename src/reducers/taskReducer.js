@@ -36,7 +36,6 @@ const taskReducer = (state = initialState, action = {}) => {
     case taskActions.taskDetailsFetchingFailed:
     case taskActions.taskUpdationSucceeded:
     case taskActions.taskUpdationFailed:
-    case taskActions.taskDeletionInitiated:
     case taskActions.toggleModalState:
       {
         const { modalState } = action.payload || {};
@@ -64,6 +63,7 @@ const taskReducer = (state = initialState, action = {}) => {
       };
     }
     case taskActions.taskCreationFailed:
+    case taskActions.taskDeletionInitiated:
     case taskActions.taskCreationSucceeded: {
       // let boardModalState = initialState.boardModalState
       // boardModalState.isOpen = false
@@ -71,10 +71,12 @@ const taskReducer = (state = initialState, action = {}) => {
     }
     case taskActions.taskDeletionSucceeded:
     case taskActions.taskDeletionFailed: {
-      let deleteBoardModalState = initialState.deleteBoardModalState;
-      deleteBoardModalState.isOpen = false;
-      deleteBoardModalState.boardId =  null;
-      return { ...state, ...action.payload, ...deleteBoardModalState}
+      
+      return { ...state, ...action.payload}
+    }
+    case taskActions.toggleDeleteModalState: {
+      let deleteTaskModalState = action.payload.deleteTaskModalState;
+      return { ...state, ...action.payload, ...deleteTaskModalState}
     }
     case taskActions.updateFilteredBoards: {
       const { payload } = action,

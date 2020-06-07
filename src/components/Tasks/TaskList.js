@@ -1,6 +1,6 @@
 import React from "react";
-import { ListGroup, ListGroupItem, Col, UncontrolledTooltip } from "reactstrap";
-import { MdModeEdit, MdDelete, MdAdd } from "react-icons/md"
+import { ListGroup, ListGroupItem,  UncontrolledTooltip } from "reactstrap";
+import { MdModeEdit, MdDelete } from "react-icons/md"
 
 const TaskList = ( {tasks, toggleModal, toggleDeleteModal, lane}) => {
 

@@ -2,9 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import { ModalBody, ModalFooter } from "reactstrap"
 import NativeSelect from '@material-ui/core/NativeSelect';
 
@@ -23,22 +21,6 @@ export default class TaskForm extends React.Component {
   };
   }
  
-
-  static getDerivedStateFromProps(props, nextProps) {
-    // console.log({props, nextProps})
-    // if(props.taskModalState){
-    //   const { title, priority, labels =[], due_date } = props.taskModalState;
-    //   console.log("=======", labels)
-    //   return {
-    //     title,
-    //     priority,
-    //     label: labels.length ? [0] : "",
-    //     due_date
-    //   }
-    // }
-
-    // return null;
-  }
   onBlur = e => {
     e.target.value = e.target.value.trim()
     this.setState({
@@ -95,9 +77,10 @@ export default class TaskForm extends React.Component {
         label:"",
         due_date:null,
       });
+      toggleModal(taskId, lane)
     }
 
-    toggleModal(taskId, lane)
+    
   };
 
   
@@ -185,7 +168,7 @@ export default class TaskForm extends React.Component {
           <option value="">None</option>
           {
             labels.map(label => {
-              return  <option value={label.value}>{label.label}</option>
+              return  <option value={label.value} key={label.value}>{label.label}</option>
             })
           }
         </NativeSelect>

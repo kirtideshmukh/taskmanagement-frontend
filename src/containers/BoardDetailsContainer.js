@@ -4,19 +4,17 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   fetchBoardDetails,
 } from "actions/boardActions";
-import { toggleModalState} from "actions/taskActions"
-import Loader from "components/shared/Loader";
+import { toggleModalState, deleteTask, toggleDeleteModalState} from "actions/taskActions"
 
-import { getStatusWiseTasks } from "reducers/boardDetailsReducer";
 import TaskLane from "components/Tasks/TaskLane";
 import { fetchPriorites, fetchStatusList, fetchLabels } from "../actions/boardActions";
 import TaskModal from "../components/Tasks/TaskModal";
+import DeleteTaskModal from "../components/Tasks/DeleteTaskModal";
 
 const BoardDetailsContainer = (props) => {
   const dispatch = useDispatch(),
     { userId } = useSelector(state => state.appReducer),
-    { boardDetails, 
-    isLoading,
+    { 
      taskList,
       
       statusList,
@@ -43,12 +41,11 @@ const BoardDetailsContainer = (props) => {
     deleteTaskModalState.isOpen = !deleteTaskModalState.isOpen;
     deleteTaskModalState.taskId = deletedTaskId;
     
-    dispatch(toggleModalState(deleteTaskModalState));
+    dispatch(toggleDeleteModalState(deleteTaskModalState));
   }
 
   const toggleModal = (task= {} , lane) =>{
     const { id = null, title ="", priority ="", desc = "", labels = []} = task || {};
-    console.log({task})
     taskModalState.isOpen = !taskModalState.isOpen;
     taskModalState.taskId =  id
     taskModalState.lane = lane;
@@ -59,6 +56,10 @@ const BoardDetailsContainer = (props) => {
     taskModalState.labels = labels
     
     dispatch(toggleModalState(taskModalState));
+  }
+
+   const callDeleteTask= () => {
+    dispatch(deleteTask({task_id: deleteTaskModalState.taskId, board_id: boardId}))
   }
 
   return (
@@ -76,6 +77,15 @@ const BoardDetailsContainer = (props) => {
             lane={taskModalState.lane}
             taskId={taskModalState.taskId}
             taskModalState={taskModalState}
+          />
+        )
+      }
+      {
+        deleteTaskModalState.isOpen && (
+          <DeleteTaskModal
+            modalState={deleteTaskModalState.isOpen}
+            toggleModal={toggleDeleteModal}
+            deleteTask={callDeleteTask}
           />
         )
       }
