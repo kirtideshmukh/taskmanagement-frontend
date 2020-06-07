@@ -21,5 +21,5 @@ export function* fetchPriorities() {
 }
 
 export function* fetchPrioritiesSaga() {
-  yield takeLatest(boardActions.fetchPriorities, fetchPriorities);
+  yield takeLatest(boardActions.fetchPriorites, fetchPriorities);
 }

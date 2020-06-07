@@ -8,7 +8,7 @@ import taskActions, {
 } from "actions/taskActions";
 
 import { createTaskApi } from "apis/taskApis";
-import { fetchBoardDetails } from "./fetchBoardDetailsSaga";
+import { fetchBoardDetails } from "actions/boardActions";
 
 import { successNotification, dangerNotification } from "notificationStore";
 

@@ -15,7 +15,7 @@ export const initialState = {
 export const getStatusWiseTasks  = (tasks = [], taskStatus = []) => {
   let value = [];
   return taskStatus.map(status => { 
-    value = tasks.filter(task => task.status === status.name)
+    value = tasks.filter(task => task.status === status)
     return {
       [status]: value  || []
     }
@@ -35,25 +35,25 @@ const boardDetailsReducer = (state = initialState, action = {}) => {
     case boardActions.fetchingLabelsSucceeded:
       return {
         ...state,
-        labels: getKeyValuePairs(action.payload.data)
+        labels: action.payload.data
       }
     case boardActions.fetchingPrioritiesSucceeded:
       return {
         ...state,
-        priorities: getKeyValuePairs(action.payload.data)
+        priorities: action.payload.data
       }
     case boardActions.fetchingStatusListSucceeded:
       return {
         ...state,
-        statusList: getKeyValuePairs(action.payload.data)
+        statusList: action.payload.data
       }
     case boardActions.searchInitiated:
       return { ...state, ...action.payload };
     case boardActions.searchSucceeded:{
-      const { tasks} = action.payload || {};
+      const { taskList} = action.payload || {};
       return {
         ...state,
-        taskList: getStatusWiseTasks(tasks, state.taskStatus)
+        taskList: getStatusWiseTasks(taskList, state.taskStatus)
       }
     }
     case boardActions.boardDetailsFetchingSucceeded: {

@@ -12,6 +12,7 @@ import { updateTaskSaga } from "./updateTaskSaga"
 import { fetchLabelsSaga} from "./fetchLabelsSaga"
 import { fetchPrioritiesSaga } from "./fetchPrioritiesSaga"
 import { fetchStatusListSaga } from "./fetchStatusListSaga"
+import { deleteTaskSaga } from "./deleteTaskSaga"
 
 const allSagas = [
   // fetchMyBiddingAmountSaga()
@@ -24,8 +25,9 @@ const allSagas = [
   createTaskSaga(),
   updateTaskSaga(),
   fetchLabelsSaga(),
-  // fetchPrioritiesSaga(),
-  fetchStatusListSaga()
+  fetchPrioritiesSaga(),
+  fetchStatusListSaga(),
+  deleteTaskSaga()
 ];
 
 export default function* rootSaga() {

@@ -55,6 +55,8 @@ export default class SearchForm extends React.Component {
   };
 
   onSubmit = e => {
+    const { callSearchApi } = this.props;
+    const { query, priority, label, from, to } = this.state;
     e.preventDefault();
 
     console.log(this.state);
@@ -69,18 +71,21 @@ export default class SearchForm extends React.Component {
         to:"",
         range_error:"",
       });
+      callSearchApi({query, priority, label, from, to})
+      
     }
   };  
   
   render() {
-    
+    const { labels,  priorities} = this.props;
     return (
       <div style={{ 
-        marginLeft: "35%",
-        marginRight: "25%",
+        marginLeft: "30%",
+        marginRight: "20%",
         justifyContent: "center",
         backgroundColor: "#f2f2f2",
-        padding: "30px"
+        padding: "10px",
+        width:"600px"
         }}>
       <form>
       <div>
@@ -116,11 +121,14 @@ export default class SearchForm extends React.Component {
               inputProps={{
                 name: 'priority',
               }}
+              value={this.state.priority}
             >
-              <option value="">All</option>
-              <option value={"High"}>High</option>
-              <option value={"Medium"}>Medium</option>
-              <option value={"Low"}>Low</option>
+              <option value="">None</option> 
+              {
+                priorities.map(priority => {
+                  return  <option value={priority} key={priority}>{priority}</option>
+                })
+              }
             </NativeSelect>
           </FormControl>
 
@@ -138,12 +146,14 @@ export default class SearchForm extends React.Component {
                 name: 'label',
                 id: 'age-native-label-placeholder',
               }}
+              value={this.state.label}
             >
-              <option value="">All</option>
-              <option value={"Personal"}>Personal</option>
-              <option value={"Work"}>Work</option>
-              <option value={"Shopping"}>Shopping</option>
-              <option value={"Others"}>Others</option>
+              <option value="">None</option>
+              {
+                labels.map(label => {
+                  return  <option value={label} key={label}>{label}</option>
+                })
+              }
             </NativeSelect>
           </FormControl>
 
@@ -160,6 +170,7 @@ export default class SearchForm extends React.Component {
             InputLabelProps={{
               shrink: true,
             }}
+            value={this.state.from}
           />
 
           <TextField
@@ -173,6 +184,7 @@ export default class SearchForm extends React.Component {
             InputLabelProps={{
               shrink: true,
             }}
+            value={this.state.to}
           />
           </div>
         </ExpansionPanelDetails>

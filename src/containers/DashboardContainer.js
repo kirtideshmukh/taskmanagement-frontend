@@ -18,34 +18,6 @@ import DeleteBoardModal from "components/Dashboard/DeleteBoardModal";
 
 import "../components/Dashboard/dashboard.css";
 
-const boards = [{
-  id: 1,
-  name: "Board 1"
-},
-{
-  id:2,
-  name: "Board 2"
-},
-{
-  id:3,
-  name: "Board 3"
-},
-{
-  id:4,
-  name: "Board 4"
-},
-{
-  id:5,
-  name: "Board 5"
-},
-{
-  id:6,
-  name: "Board 26"
-}
-]
-
-
-
 const Dashboard = () => {
   const dispatch = useDispatch(),
     { userId } = useSelector(state => state.appReducer),

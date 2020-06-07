@@ -13,7 +13,12 @@ export const initialState = {
   taskModalState: {
     isOpen: false,
     taskId: null,
-    lane: null
+    lane: null,
+    title: "",
+    priority: "",
+    desc: "",
+    due_date: ""
+
   },
   deleteTaskModalState: {
     isOpen: false,
@@ -31,14 +36,19 @@ const taskReducer = (state = initialState, action = {}) => {
     case taskActions.taskDetailsFetchingFailed:
     case taskActions.taskUpdationSucceeded:
     case taskActions.taskUpdationFailed:
-    case taskActions.taskDeletionInitiated:
     case taskActions.toggleModalState:
       {
         const { modalState } = action.payload || {};
         let taskModalState = action.payload.modalState;
       taskModalState.isOpen = modalState.isOpen;
       taskModalState.taskId =  modalState.taskId;
-      taskModalState.lane = modalState.lane
+      taskModalState.title = modalState.title;
+    taskModalState.priority = modalState.priority;
+    taskModalState.desc = modalState.desc;
+    taskModalState.title = modalState.title;
+      taskModalState.lane = modalState.lane;
+      taskModalState.labels = modalState.labels
+      taskModalState.due_date = modalState.due_date
       return { ...state,  ...taskModalState}
       }
       
@@ -54,17 +64,20 @@ const taskReducer = (state = initialState, action = {}) => {
       };
     }
     case taskActions.taskCreationFailed:
+    case taskActions.taskDeletionInitiated:
     case taskActions.taskCreationSucceeded: {
-      let boardModalState = initialState.boardModalState
-      boardModalState.isOpen = false
-      return { ...state, ...boardModalState}
+      // let boardModalState = initialState.boardModalState
+      // boardModalState.isOpen = false
+      return { ...state, ...action.payload}
     }
     case taskActions.taskDeletionSucceeded:
     case taskActions.taskDeletionFailed: {
-      let deleteBoardModalState = initialState.deleteBoardModalState;
-      deleteBoardModalState.isOpen = false;
-      deleteBoardModalState.boardId =  null;
-      return { ...state, ...action.payload, ...deleteBoardModalState}
+      
+      return { ...state, ...action.payload}
+    }
+    case taskActions.toggleDeleteModalState: {
+      let deleteTaskModalState = action.payload.deleteTaskModalState;
+      return { ...state, ...action.payload, ...deleteTaskModalState}
     }
     case taskActions.updateFilteredBoards: {
       const { payload } = action,

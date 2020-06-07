@@ -2,22 +2,25 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import { ModalBody, ModalFooter } from "reactstrap"
 import NativeSelect from '@material-ui/core/NativeSelect';
 
 export default class TaskForm extends React.Component {
- state = {
-    title: "",
+  constructor(props) {
+    super(props);
+    const { taskModalState } = props;
+    this.state = {
+    title: taskModalState.title,
     titleError: "",
-    description:"",
-    priority:"Low",
-    label:"",
-    due_date:null,
+    description: taskModalState.desc,
+    priority: taskModalState.priority || "",
+    label:taskModalState.labels.length ?  taskModalState.labels[0] : "",
+    due_date: taskModalState.due_date,
     due_date_error:"",
   };
+  }
+ 
   onBlur = e => {
     e.target.value = e.target.value.trim()
     this.setState({
@@ -55,9 +58,8 @@ export default class TaskForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const { callUpdateTask, callCreateTask, taskId} = this.props;
+    const { callUpdateTask, callCreateTask, taskId, toggleModal, lane} = this.props;
 
-    console.log(this.state);
     const err = this.validate();
     if (!err) {
       
@@ -75,19 +77,16 @@ export default class TaskForm extends React.Component {
         label:"",
         due_date:null,
       });
+      toggleModal(taskId, lane)
     }
+
+    
   };
 
-  onCancel = e => {
-    //TODO
-    console.log("Cancelling the form");
-  };
-  
   
   render() {
-    const { labels, statusList, priorities, toggleModal} = this.props;
-    // console.log("=====", this.props)
-    
+    const { labels,  priorities, toggleModal} = this.props;
+       
     return (
       <div className="ml-3 mt-3 mb-3">
       <form>
@@ -131,26 +130,30 @@ export default class TaskForm extends React.Component {
         defaultValue={new Date()}
         onChange={e => this.change(e)}
         helperText={this.state.due_date_error}
+        value={this.state.due_date}
         InputLabelProps={{
           shrink: true,
         }}
       />
         <br/>
-      {/* <FormControl required >
+      <FormControl required >
         <InputLabel >Priority</InputLabel>
         <NativeSelect
         name="priority"
-        value="Low"
+        value={this.state.priority}
         onChange={e => this.change(e)}
         inputProps={{
         name: 'priority',
         }}
-        >
-        <option value={"High"}>High</option>
-        <option value={"Medium"}>Medium</option>
-        <option value={"Low"}>Low</option>
+        > 
+          <option value="">None</option> 
+          {
+            priorities.map(priority => {
+              return  <option value={priority} key={priority}>{priority}</option>
+            })
+          }
         </NativeSelect>
-        </FormControl> */}
+        </FormControl>
        
 
       <br/>
@@ -160,16 +163,17 @@ export default class TaskForm extends React.Component {
         Label
         </InputLabel>
         <NativeSelect
-        name="label"
-        onChange={e => this.change(e)}
-        inputProps={{
-        name: 'label',
-        }}
-        >
+          value={this.state.label}
+          name="label"
+          onChange={e => this.change(e)}
+          inputProps={{
+          name: 'label',
+          }}
+          >
           <option value="">None</option>
           {
             labels.map(label => {
-              return  <option value={label.value}>{label.label}</option>
+              return  <option value={label} key={label}>{label}</option>
             })
           }
         </NativeSelect>

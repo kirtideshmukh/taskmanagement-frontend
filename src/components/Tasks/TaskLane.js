@@ -18,7 +18,7 @@ const TaskLane = (props) => {
          <Card className="mt-3 mb-3">
             <CardTitle className="lane-title"><strong>{key}</strong> <GoDiffAdded id="add-task-icon" onClick={()=> toggleModal(null, key) }/></CardTitle>
             <CardBody>
-              <TaskList tasks={value}  toggleModal={toggleModal} toggleDeleteModal={toggleDeleteModal}/>
+              <TaskList tasks={value}  toggleModal={toggleModal} toggleDeleteModal={toggleDeleteModal} lane={key}/>
             </CardBody>
            </Card>
            <UncontrolledTooltip placement="right" target="add-task-icon">
