@@ -2,11 +2,10 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import { ROUTES } from "appConstants";
-
+import axios from 'axios';
 export default class LoginForm extends React.Component {
 
   state = {
-
     username: "",
     usernameError: "",
     password: "",
@@ -32,10 +31,11 @@ export default class LoginForm extends React.Component {
       passwordError: ""
     };
 
-    if (this.state.username.length < 3) {
+    if (this.state.username.indexOf("@") === -1 || this.state.username.indexOf(".") === -1) {
       isError = true;
-      errors.usernameError = "Username needs to be atleast 3 characters long";
+      errors.usernameError = "Requires valid email";
     }
+
     if (this.state.username.indexOf(" ") !== -1) {
       isError = true;
       errors.usernameError = "Username should not contain space";
@@ -55,15 +55,12 @@ export default class LoginForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    // this.props.onSubmit(this.state);
+
     const err = this.validate();
     if (!err) {
       // clear form
+      const data = {"email": this.state.username, "password":this.state.password}
       this.setState({
-        firstName: "",
-        firstNameError: "",
-        lastName: "",
-        lastNameError: "",
         username: "",
         usernameError: "",
         email: "",
@@ -71,13 +68,26 @@ export default class LoginForm extends React.Component {
         password: "",
         passwordError: ""
       });
-      this.props.onChange({
-        firstName: "",
-        lastName: "",
-        username: "",
-        email: "",
-        password: ""
-      });
+  
+      //backend call
+      const url = '/api/auth/login';
+      console.log(url);
+      console.log(data);
+
+      axios.post(url, data, {
+        headers: {'Authorization': 'token'}
+        }).then((response) => {
+
+          if (response.status === 200) {
+          //redirect to dashboard: get boards by userId
+        }
+        }).catch((error) => {
+          if (error.response) {
+            if (error.response.status === 409) {
+                this.errorMessageGenerator()
+            }
+          }
+        })
     }
   };
 
@@ -96,8 +106,8 @@ export default class LoginForm extends React.Component {
             <TextField
             error = {this.state.usernameError.length > 0}
             name="username"
-            hinttext="Username"
-            label="Username"
+            hinttext="Email"
+            label="Email"
             value={this.state.username}
             onBlur={e => this.onBlur(e)}
             onChange={e => this.change(e)}

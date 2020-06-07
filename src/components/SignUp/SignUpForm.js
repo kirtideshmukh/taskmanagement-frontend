@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
-
+import axios from 'axios';
 export default class SignUpForm extends React.Component {
 
   state = {
@@ -77,9 +77,15 @@ export default class SignUpForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    // this.props.onSubmit(this.state);
     const err = this.validate();
     if (!err) {
+
+      const data = {"email": this.state.email,
+        "password":this.state.password,
+        "username":this.state.username,
+        "first_name":this.state.firstName,
+        "last_name":this.state.lastName,
+        }
       // clear form
       this.setState({
         firstName: "",
@@ -93,13 +99,26 @@ export default class SignUpForm extends React.Component {
         password: "",
         passwordError: ""
       });
-      this.props.onChange({
-        firstName: "",
-        lastName: "",
-        username: "",
-        email: "",
-        password: ""
-      });
+
+      //backend call
+      const url = '/api/user/';
+      console.log(url);
+      console.log(data);
+
+      axios.post(url, data).then((response) => {
+
+          if (response.status === 200) {
+          //redirect to dashboard: get boards by email
+          //store generated token to global state to use in entire app
+        }
+        }).catch((error) => {
+          if (error.response) {
+            if (error.response.status === 409) {
+                this.errorMessageGenerator()
+            }
+          }
+        })
+
     }
   };
 

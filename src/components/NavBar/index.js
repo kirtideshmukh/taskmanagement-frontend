@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import {
   Collapse,
   Navbar,
@@ -17,6 +18,25 @@ const Example = (props) => {
 
   const handleLogout = ( )=> {
     console.log("Handle logout");
+
+      //backend call
+      const url = '/api/auth/logout';
+      console.log(url);
+      axios.post(url, {}, {
+        headers: {'Authorization': 'token'}
+        }).then((response) => {
+
+          if (response.status === 200) {
+          //redirect to Login form
+        }
+        }).catch((error) => {
+          if (error.response) {
+            if (error.response.status === 409) {
+                this.errorMessageGenerator()
+            }
+          }
+        })
+
   }
   return (
     <div>
