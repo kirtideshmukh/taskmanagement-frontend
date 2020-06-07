@@ -62,7 +62,6 @@ export default class SearchForm extends React.Component {
     console.log(this.state);
     const err = this.validate();
     if (!err) {
-      callSearchApi({query, priority, label, from, to})
       // clear form
       this.setState({
         query: "",
@@ -72,12 +71,13 @@ export default class SearchForm extends React.Component {
         to:"",
         range_error:"",
       });
+      callSearchApi({query, priority, label, from, to})
+      
     }
   };  
   
   render() {
     const { labels,  priorities} = this.props;
-    console.log("^^^^^===", this.props);
     return (
       <div style={{ 
         marginLeft: "30%",
@@ -121,6 +121,7 @@ export default class SearchForm extends React.Component {
               inputProps={{
                 name: 'priority',
               }}
+              value={this.state.priority}
             >
               <option value="">None</option> 
               {
@@ -145,6 +146,7 @@ export default class SearchForm extends React.Component {
                 name: 'label',
                 id: 'age-native-label-placeholder',
               }}
+              value={this.state.label}
             >
               <option value="">None</option>
               {
@@ -168,6 +170,7 @@ export default class SearchForm extends React.Component {
             InputLabelProps={{
               shrink: true,
             }}
+            value={this.state.from}
           />
 
           <TextField
@@ -181,6 +184,7 @@ export default class SearchForm extends React.Component {
             InputLabelProps={{
               shrink: true,
             }}
+            value={this.state.to}
           />
           </div>
         </ExpansionPanelDetails>

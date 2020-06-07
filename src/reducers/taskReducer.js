@@ -16,7 +16,8 @@ export const initialState = {
     lane: null,
     title: "",
     priority: "",
-    desc: ""
+    desc: "",
+    due_date: ""
 
   },
   deleteTaskModalState: {
@@ -47,6 +48,7 @@ const taskReducer = (state = initialState, action = {}) => {
     taskModalState.title = modalState.title;
       taskModalState.lane = modalState.lane;
       taskModalState.labels = modalState.labels
+      taskModalState.due_date = modalState.due_date
       return { ...state,  ...taskModalState}
       }
       

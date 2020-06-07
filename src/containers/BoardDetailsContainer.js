@@ -48,7 +48,7 @@ const BoardDetailsContainer = (props) => {
   }
 
   const toggleModal = (task= {} , lane) =>{
-    const { id = null, title ="", priority ="", desc = "", labels = []} = task || {};
+    const { id = null, title ="", priority ="", desc = "", labels = [], due_date =""} = task || {};
     taskModalState.isOpen = !taskModalState.isOpen;
     taskModalState.taskId =  id
     taskModalState.lane = lane;
@@ -56,7 +56,8 @@ const BoardDetailsContainer = (props) => {
     taskModalState.priority = priority;
     taskModalState.desc = desc;
     taskModalState.title = title;
-    taskModalState.labels = labels
+    taskModalState.labels = labels;
+    taskModalState.due_date = due_date;
     
     dispatch(toggleModalState(taskModalState));
   }

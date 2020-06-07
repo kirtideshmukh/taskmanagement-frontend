@@ -17,8 +17,6 @@ export function* searchBoard(action) {
     yield put(searchSucceeded(data));
     yield successNotification("search complete");
   } catch (errorResponse) {
-    console.log({errorResponse})
-    // const errorsShown = getFormErrors(errors, message);
     yield dangerNotification("error in searching")
     
     yield put(searchFailed());
