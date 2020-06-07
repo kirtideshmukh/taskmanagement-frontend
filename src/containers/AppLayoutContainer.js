@@ -3,6 +3,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import ReactNotification from "react-notifications-component";
+import { getAuthToken } from "store";
 
 import { routes } from "routes";
 
@@ -11,6 +12,7 @@ import RouteWithSubRoutes from "../utils/routesWithSubRoutes";
 import NavigationBar from "../components/NavBar";
 
 const AppLayoutContainer = () => {
+  // console.log(getAuthToken());
   return (
     <>
       <ReactNotification />
@@ -19,7 +21,6 @@ const AppLayoutContainer = () => {
         <Router>
           <Switch>
             <Redirect exact from={ROUTES.index} to={ROUTES.dashboard} />
-            {/* <Redirect exact from={ROUTES.index} to={ROUTES.login} /> */}
             {routes.map(route => {
               return <RouteWithSubRoutes key={route.key} {...route} />;
             })}      

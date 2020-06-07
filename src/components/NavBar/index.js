@@ -9,25 +9,33 @@ import {
   NavbarText,
   Button
 } from 'reactstrap';
-import { ROUTES } from 'appConstants';
+import { Redirect } from "react-router-dom";
+import { ROUTES, apiHostUrl } from 'appConstants';
+import { removeLocalStorageState } from "utils/localStorageHelpers.js"
+import { loadLocalStorageState } from '../../utils/localStorageHelpers';
 
 const Example = (props) => {
+  const authToken = loadLocalStorageState() ? loadLocalStorageState().authToken : null
   const [isOpen, setIsOpen] = useState(false);
+  const [redirectToLogin, setRedirectToLogin] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
   const handleLogout = ( )=> {
     console.log("Handle logout");
-
+    
       //backend call
-      const url = '/api/auth/logout';
+      const url = `${apiHostUrl}/api/auth/logout`;
       console.log(url);
       axios.post(url, {}, {
-        headers: {'Authorization': 'token'}
+        headers: {'Authorization': authToken}
         }).then((response) => {
 
-          if (response.status === 200) {
+          if (response.status >=200 && response.status <300) {
           //redirect to Login form
+          setRedirectToLogin(true)
+          removeLocalStorageState()
+
         }
         }).catch((error) => {
           if (error.response) {
@@ -38,6 +46,11 @@ const Example = (props) => {
         })
 
   }
+
+  if(redirectToLogin){
+    return <Redirect to={ROUTES.login} />
+  }
+
   return (
     <div>
       <Navbar color="light" light expand="md">
@@ -57,9 +70,9 @@ const Example = (props) => {
            * Change password
            * Logout
            */}
-          <NavbarText>Profile Icon</NavbarText>
+          
         </Collapse>
-        <Button onClick={ e =>handleLogout(e)}>Logout</Button>
+         {authToken && <Button onClick={ e =>handleLogout(e)}>Logout</Button>}
       </Navbar>
     </div>
   );

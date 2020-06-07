@@ -44,3 +44,5 @@ export const PUBLIC_API_END_POINTS = [
 export const UNAUTHORIZED_CODE = 401;
 
 export const USER_ID = 101;
+
+export const apiHostUrl = process.env.REACT_APP_API_BASE_URL;

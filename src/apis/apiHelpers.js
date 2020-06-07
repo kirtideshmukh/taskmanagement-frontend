@@ -9,6 +9,8 @@ import {
 import { redirectTo, getPathName } from "utils/browserHelpers";
 import { getAppReducer } from "store";
 import { isEmptyObject } from "utils/isEmptyValue";
+import { getAuthToken } from "../store";
+import { loadLocalStorageState } from "../utils/localStorageHelpers";
 
 // eslint-disable-next-line no-undef
 const apiHostUrl = process.env.REACT_APP_API_BASE_URL;
@@ -21,6 +23,7 @@ const getAuthorizationHeader = authToken => {
 
 /**Get request url as per bidwillz site */
 const getRequestUrl = reqPath => {
+  console.log({apiHostUrl})
   if (!apiHostUrl) {
     return `/${reqPath}`;
   }
@@ -108,10 +111,8 @@ const callApi = async (reqPath, payload, httpMethod, optionalHeaders = {}) => {
 
   /**If api requires auth_token, send it in authorization header. */
   if (isApiRequiringAuthToken(finalReqPath)) {
-    const {
-      loggedInUser: { auth_token }
-    } = getAppReducer();
-    headers = { ...headers, ...getAuthorizationHeader(auth_token) };
+    
+    headers = { ...headers, ...getAuthorizationHeader(loadLocalStorageState().authToken) };
   }
 
   const fetchOptions = constructFetchOptions(httpMethod, headers, payload),
