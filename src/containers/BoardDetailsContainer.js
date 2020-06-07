@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import {
   fetchBoardDetails,
+  searchInitiated
 } from "actions/boardActions";
 import { toggleModalState, deleteTask, toggleDeleteModalState} from "actions/taskActions"
 
@@ -10,6 +11,8 @@ import TaskLane from "components/Tasks/TaskLane";
 import { fetchPriorites, fetchStatusList, fetchLabels } from "../actions/boardActions";
 import TaskModal from "../components/Tasks/TaskModal";
 import DeleteTaskModal from "../components/Tasks/DeleteTaskModal";
+import { Row } from "reactstrap";
+import SearchForm from "../components/Search/SearchForm";
 
 const BoardDetailsContainer = (props) => {
   const dispatch = useDispatch(),
@@ -19,7 +22,7 @@ const BoardDetailsContainer = (props) => {
       
       statusList,
       priorities,
-      labels
+      labels =[]
      } = useSelector(state => state.boardDetailsReducer),
      { 
       taskModalState,
@@ -62,9 +65,22 @@ const BoardDetailsContainer = (props) => {
     dispatch(deleteTask({task_id: deleteTaskModalState.taskId, board_id: boardId}))
   }
 
+  const callSearchApi =(params) => {
+    dispatch(searchInitiated({...params, board_id: boardId}))
+  }
+
   return (
     <Fragment>
+      <Row>
+        <SearchForm
+          priorities={priorities}
+          labels={labels}
+          callSearchApi={callSearchApi}
+       />
+      </Row>
+     
       <TaskLane taskList={taskList}  toggleModal={toggleModal} toggleDeleteModal={toggleDeleteModal}/>
+      
       {
         taskModalState.isOpen && (
           <TaskModal
@@ -89,6 +105,7 @@ const BoardDetailsContainer = (props) => {
           />
         )
       }
+      
     </Fragment>
     
   ) 
