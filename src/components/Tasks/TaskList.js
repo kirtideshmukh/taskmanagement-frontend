@@ -1,5 +1,5 @@
-import React from "react";
-import { ListGroup, ListGroupItem,  UncontrolledTooltip } from "reactstrap";
+import React, { Fragment } from "react";
+import { ListGroup, ListGroupItem,  UncontrolledTooltip, Row } from "reactstrap";
 import { MdModeEdit, MdDelete } from "react-icons/md"
 import { FaExchangeAlt} from "react-icons/fa"
 
@@ -10,8 +10,10 @@ const TaskList = ( {tasks, toggleModal, toggleDeleteModal, lane, toggleStatusMod
       {
         tasks.map(task => {
           return <ListGroupItem key={task.id} className="task-list">
-           
-              {task.title}  
+              <Row>
+              {task.title} 
+              <span className="ml-2 mr-2">{ task.labels.join(",")}</span>
+              </Row>
               <span className="action-buttons">
                 <MdModeEdit  id="edit-task-icon" onClick={() => toggleModal(task,lane )}/>
                 <MdDelete id="delete-task-icon" onClick={() => toggleDeleteModal(task.id)} />
