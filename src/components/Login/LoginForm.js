@@ -3,13 +3,17 @@ import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import { ROUTES } from "appConstants";
 import axios from 'axios';
+import { Redirect } from "react-router-dom";
+import { saveLocalStorageState} from "utils/localStorageHelpers.js"
+import { apiHostUrl } from '../../appConstants';
 export default class LoginForm extends React.Component {
 
   state = {
     username: "",
     usernameError: "",
     password: "",
-    passwordError: ""
+    passwordError: "",
+    redirectToDashboard: false
   };
 
   onBlur = e => {
@@ -70,16 +74,17 @@ export default class LoginForm extends React.Component {
       });
   
       //backend call
-      const url = '/api/auth/login';
+      const url = `${apiHostUrl}/api/auth/login`;
       console.log(url);
       console.log(data);
 
-      axios.post(url, data, {
-        headers: {'Authorization': 'token'}
-        }).then((response) => {
+      axios.post(url, data).then((response) => {
 
-          if (response.status === 200) {
-          //redirect to dashboard: get boards by userId
+          if (response.status >=200 && response.status <300) {
+          //redirect to dashboard: get boards by email
+          //store generated token to global state to use in entire app
+          saveLocalStorageState({authToken: response.data.Authorization})
+          this.setState({redirectToDashboard: true})
         }
         }).catch((error) => {
           if (error.response) {
@@ -92,6 +97,10 @@ export default class LoginForm extends React.Component {
   };
 
   render() {
+
+    if(this.state.redirectToDashboard){
+      return <Redirect to={ROUTES.dashboard} />;
+    }
 
     return (
       <div style={{ 
@@ -134,7 +143,7 @@ export default class LoginForm extends React.Component {
             Login 
             </Button>
             <a href= {ROUTES.signUp}>
-                 New user? Need to Sign up first. 
+              New user? Need to Sign up first. 
             </a>
             <br/>
             <p>

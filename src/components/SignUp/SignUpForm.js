@@ -1,7 +1,10 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import { Redirect } from "react-router-dom";
 import { Button } from '@material-ui/core';
 import axios from 'axios';
+import { apiHostUrl, ROUTES } from '../../appConstants';
+import { saveLocalStorageState} from "utils/localStorageHelpers.js"
 export default class SignUpForm extends React.Component {
 
   state = {
@@ -14,7 +17,8 @@ export default class SignUpForm extends React.Component {
     email: "",
     emailError: "",
     password: "",
-    passwordError: ""
+    passwordError: "",
+    redirectToDashboard: false
   };
 
   onBlur = e => {
@@ -101,15 +105,18 @@ export default class SignUpForm extends React.Component {
       });
 
       //backend call
-      const url = '/api/user/';
+      const url = `${apiHostUrl}/api/user/`;
       console.log(url);
       console.log(data);
 
-      axios.post(url, data).then((response) => {
+      return axios.post(url, data).then((response) => {
+        console.log({response})
 
-          if (response.status === 200) {
+          if (response.status >=200 && response.status <300) {
           //redirect to dashboard: get boards by email
           //store generated token to global state to use in entire app
+          saveLocalStorageState({authToken: response.data.Authorization})
+          this.setState({redirectToDashboard: true})
         }
         }).catch((error) => {
           if (error.response) {
@@ -123,6 +130,10 @@ export default class SignUpForm extends React.Component {
   };
 
   render() {
+
+    if(this.state.redirectToDashboard){
+      return <Redirect to={ROUTES.dashboard} />;
+    }
 
     return (
       <div style={{ 

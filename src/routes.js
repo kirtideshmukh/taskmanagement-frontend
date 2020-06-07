@@ -22,7 +22,8 @@ export const routes = [
   {
     path: ROUTES.login,
     component: LoginForm,
-    key: "login"
+    key: "login",
+    exact: true
   },
   {
     path: ROUTES.signUp,
